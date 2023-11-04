@@ -56,27 +56,33 @@ const App: React.FC = () => (
 		<IonReactRouter>
 			<IonTabs>
 				<IonRouterOutlet>
+					{/* Routing the path of /home to the home page */}
 					<Route
 						exact
 						path="/home"
 					>
 						<HomePage />
 					</Route>
+					{/* Routing the path of /search to the search page */}
 					<Route
 						exact
 						path="/search"
 					>
 						<SearchPage />
 					</Route>
+					{/* Routing the path of /create to the create page */}
 					<Route path="/create">
 						<CreatePage />
 					</Route>
+					{/* Routing the path of /chats to the chats page */}
 					<Route path="/chats">
 						<ChatsPage />
 					</Route>
+					{/* Routing the path of /profile to the profile page */}
 					<Route path="/profile">
 						<ProfilePage />
 					</Route>
+					{/* Routing an emoty path of / to the home page */}
 					<Route
 						exact
 						path="/"
