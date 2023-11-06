@@ -1,9 +1,7 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import React, { useState, useEffect } from "react";
-import ExploreContainer from "../components/ExploreContainer";
 import "./HomePage.css";
 import CardNextGame from "../components/CardNextGame";
-import GameList from "../components/CardNextGame";
 import { GameInfo } from "../components/CardNextGame";
 
 const HomePage: React.FC = () => {
