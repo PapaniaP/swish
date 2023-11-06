@@ -5,15 +5,15 @@ import "./HomePage.css";
 const HomePage: React.FC = () => {
 	return (
 		<IonPage>
-			<IonHeader>
+			<IonHeader className="ion-no-border">
 				<IonToolbar>
-					<IonTitle>HomePage</IonTitle>
+					<IonTitle>Your next game</IonTitle>
 				</IonToolbar>
 			</IonHeader>
 			<IonContent fullscreen>
 				<IonHeader collapse="condense">
 					<IonToolbar>
-						<IonTitle size="large">HomePage</IonTitle>
+						<IonTitle size="large">Your next game</IonTitle>
 					</IonToolbar>
 				</IonHeader>
 				<ExploreContainer name="HomePage" />

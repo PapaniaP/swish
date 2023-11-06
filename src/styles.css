@@ -1,0 +1,20 @@
+/* Global CSS file */
+
+ion-tab-bar {
+	--background: var(--main-white);
+	border-radius: 8px 8px 0px 0px;
+}
+
+ion-tab-button {
+	--color: var(--grey-dark);
+	--color-selected: var(--main-red);
+}
+
+ion-title {
+	font-family: "Teko";
+	font-size: 1.75rem;
+}
+
+ion-toolbar {
+	border-bottom: solid 1px var(--grey-mid);
+}

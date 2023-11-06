@@ -76,7 +76,7 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-light-tint: #f5f6f9;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
 	/*
    * Dark Colors
    * -------------------------------------------
@@ -260,4 +260,19 @@ html {
 	font-family: "Open Sans";
 	src: url("../assets/fonts/OpenSans-Italic-VariableFont.ttf");
 	font-style: italic;
+}
+
+/* Colours */
+:root {
+	--main-red: #ff4c38;
+	--faded-red: rgba(255, 76, 56, 0.5);
+	--main-blue: #3e65ff;
+	--main-yellow: #fed229;
+	--main-beige: #fef5e6;
+	--main-white: #ffffff;
+	--main-black: #000000;
+	--main-green: #54d914;
+	--grey-light: #f5f5f5;
+	--grey-mid: #d9d9d9;
+	--grey-dark: #8c8c8c;
 }

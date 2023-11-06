@@ -16,6 +16,7 @@ import {
 	chatbubbleOutline,
 	ellipse,
 	home,
+	homeOutline,
 	person,
 	personOutline,
 	searchOutline,
@@ -41,6 +42,7 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
+import "./styles.css";
 
 /* Pages */
 import HomePage from "./pages/HomePage";
@@ -48,6 +50,7 @@ import SearchPage from "./pages/SearchPage";
 import CreatePage from "./pages/CreatePage";
 import ChatsPage from "./pages/ChatsPage";
 import ProfilePage from "./pages/ProfilePage";
+import ErrorPage from "./pages/ErrorPage";
 
 setupIonicReact();
 
@@ -97,7 +100,7 @@ const App: React.FC = () => (
 					>
 						<IonIcon
 							aria-hidden="true"
-							icon={home}
+							icon={homeOutline}
 						/>
 						<IonLabel>Home</IonLabel>
 					</IonTabButton>
