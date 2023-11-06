@@ -1,6 +1,8 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import ExploreContainer from "../components/ExploreContainer";
 import "./HomePage.css";
+import CardNextGame from "../components/CardNextGame";
+import GameList from "../components/CardNextGame";
 
 const HomePage: React.FC = () => {
 	return (
@@ -16,7 +18,7 @@ const HomePage: React.FC = () => {
 						<IonTitle size="large">Your next game</IonTitle>
 					</IonToolbar>
 				</IonHeader>
-				<ExploreContainer name="HomePage" />
+				<CardNextGame />
 			</IonContent>
 		</IonPage>
 	);
