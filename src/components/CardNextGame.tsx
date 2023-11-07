@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import "./CardNextGame.css";
 import {
 	IonCard,
 	IonCardContent,
@@ -10,7 +11,9 @@ import {
 	IonAvatar,
 	IonImg,
 	IonChip,
+	IonIcon,
 } from "@ionic/react";
+import { peopleOutline, timeOutline } from "ionicons/icons";
 
 export type GameInfo = {
 	id: number;
@@ -31,21 +34,57 @@ type CardNextGameProps = {
 };
 
 const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
+	const numberOfPeople = gameInfo.gameSize - gameInfo.availableSpots;
 	return (
 		<IonCard>
 			<IonCardContent>
-				<IonChip color="secondary">{gameInfo.gameType}</IonChip>
-				<IonChip color="primary">{`Size: ${gameInfo.gameSize} players`}</IonChip>
-				<IonChip color="tertiary">{`Available Spots: ${gameInfo.availableSpots}`}</IonChip>
+				<IonItem
+					className="tag-container no-margin"
+					lines="none"
+				>
+					<IonChip
+						className="custom-chip"
+						color="secondary"
+						outline={true}
+					>
+						{gameInfo.gameType}
+					</IonChip>
+					<IonChip
+						className="custom-chip"
+						color="secondary"
+						outline={true}
+					>
+						{gameInfo.gameSize}
+					</IonChip>
 
-				<IonCardHeader>
-					<IonCardSubtitle>{gameInfo.time}</IonCardSubtitle>
-					<IonCardTitle>{gameInfo.gameName}</IonCardTitle>
-				</IonCardHeader>
+					<IonChip
+						className="custom-chip"
+						color="secondary"
+						outline={true}
+						slot="end"
+					>
+						<IonIcon
+							className="custom-icon"
+							aria-hidden="true"
+							icon={peopleOutline}
+						/>
+						{`${numberOfPeople} / ${gameInfo.gameSize}`}
+					</IonChip>
+				</IonItem>
 
 				<IonItem lines="full">
-					<IonLabel>Location</IonLabel>
-					<IonLabel slot="end">{gameInfo.location}</IonLabel>
+					<IonCardTitle>{gameInfo.gameName}</IonCardTitle>
+				</IonItem>
+
+				<IonItem lines="full">
+					<p>
+						<IonIcon
+							aria-hidden="true"
+							icon={timeOutline}
+							slot="start"
+						></IonIcon>
+						<IonLabel>{gameInfo.time}</IonLabel>
+					</p>
 				</IonItem>
 				<IonItem>
 					<IonAvatar slot="start">
