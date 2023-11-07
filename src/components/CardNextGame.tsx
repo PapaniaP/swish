@@ -13,7 +13,7 @@ import {
 	IonChip,
 	IonIcon,
 } from "@ionic/react";
-import { peopleOutline, timeOutline } from "ionicons/icons";
+import { peopleOutline, pinOutline, timeOutline } from "ionicons/icons";
 
 export type GameInfo = {
 	id: number;
@@ -76,15 +76,23 @@ const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 					<IonCardTitle>{gameInfo.gameName}</IonCardTitle>
 				</IonItem>
 
+				<IonItem lines="none">
+					<IonIcon
+						className="label-icon"
+						aria-hidden="true"
+						icon={timeOutline}
+						slot="start"
+					></IonIcon>
+					<IonLabel className="time-label">{gameInfo.time}</IonLabel>
+				</IonItem>
 				<IonItem lines="full">
-					<p>
-						<IonIcon
-							aria-hidden="true"
-							icon={timeOutline}
-							slot="start"
-						></IonIcon>
-						<IonLabel>{gameInfo.time}</IonLabel>
-					</p>
+					<IonIcon
+						className="label-icon"
+						aria-hidden="true"
+						icon={pinOutline}
+						slot="start"
+					></IonIcon>
+					<IonLabel>{gameInfo.location}</IonLabel>
 				</IonItem>
 				<IonItem>
 					<IonAvatar slot="start">

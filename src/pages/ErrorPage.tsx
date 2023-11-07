@@ -1,25 +1,25 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import ExploreContainer from "../components/ExploreContainer";
-import "./ChatsPage.css";
+import "./ErrorPage.css";
 
-const ChatsPage: React.FC = () => {
+const ErrorPage: React.FC = () => {
 	return (
 		<IonPage>
 			<IonHeader>
 				<IonToolbar>
-					<IonTitle>ChatsPage</IonTitle>
+					<IonTitle>ErrorPage</IonTitle>
 				</IonToolbar>
 			</IonHeader>
 			<IonContent fullscreen>
 				<IonHeader collapse="condense">
 					<IonToolbar>
-						<IonTitle size="large">ChatsPage</IonTitle>
+						<IonTitle size="large">ErrorPage</IonTitle>
 					</IonToolbar>
 				</IonHeader>
-				<ExploreContainer name="ChatsPage" />
+				<ExploreContainer name="ErrorPage" />
 			</IonContent>
 		</IonPage>
 	);
 };
 
-export default ChatsPage;
+export default ErrorPage;
