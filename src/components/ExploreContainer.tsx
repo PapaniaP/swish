@@ -2,7 +2,6 @@ import "./ExploreContainer.css";
 
 interface ContainerProps {
 	name: string;
-	subheading: string;
 }
 
 const ExploreContainer: React.FC<ContainerProps> = ({ name }) => {
