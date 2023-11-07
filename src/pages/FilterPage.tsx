@@ -5,27 +5,26 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
-import "./ProfilePage.css";
 
-const ProfilePage: React.FC = () => {
+import "./FilterPage.css";
+
+const FilterPage: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>ProfilePage</IonTitle>
+          <IonTitle>FilterPage</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">ProfilePage</IonTitle>
+            <IonTitle size="large">FilterPage</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="ProfilePage" subheading={""} />
       </IonContent>
     </IonPage>
   );
 };
 
-export default ProfilePage;
+export default FilterPage;
