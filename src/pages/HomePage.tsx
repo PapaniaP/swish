@@ -4,6 +4,8 @@ import "./HomePage.css";
 import CardNextGame from "../components/CardNextGame";
 import { GameInfo } from "../components/CardNextGame";
 
+import EmptyStateHome from "../components/EmptyStateHome";
+
 const HomePage: React.FC = () => {
 	const [games, setGames] = useState<GameInfo[]>([]);
 
@@ -55,7 +57,7 @@ const HomePage: React.FC = () => {
 						gameInfo={nextGame}
 					/>
 				) : (
-					<p>No upcoming games.</p>
+					<EmptyStateHome /> // needs to be done
 				)}
 			</IonContent>
 		</IonPage>
