@@ -42,6 +42,9 @@ http://ionicframework.com/docs/theming/ */
 	--grey-mid: #d9d9d9;
 	--grey-dark: #8c8c8c;
 
+	--ion-safe-area-right: 0px;
+	--inner-padding-end: 0px;
+
 	/** primary **/
 	--ion-color-primary: #ff4c38;
 	--ion-color-primary-rgb: rgb(255, 76, 56);
@@ -117,7 +120,7 @@ http://ionicframework.com/docs/theming/ */
 
 /* @media (prefers-color-scheme: dark) { */
 /*
-   * Dark Colors
+   * Dark Colorsa
    * -------------------------------------------
    */
 
