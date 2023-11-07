@@ -8,42 +8,37 @@ const HomePage: React.FC = () => {
 	const [games, setGames] = useState<GameInfo[]>([]);
 
 	useEffect(() => {
-		const url = `https://swish-cc699-default-rtdb.europe-west1.firebasedatabase.app/games.json`;
-		fetch(url)
-			.then((response) => {
+		const fetchData = async () => {
+			try {
+				const url = `https://swish-cc699-default-rtdb.europe-west1.firebasedatabase.app/games.json`;
+				const response = await fetch(url);
+
 				if (!response.ok) {
 					throw new Error("Network response was not ok");
 				}
-				return response.json();
-			})
-			.then((data) => {
-				// Convert object of objects into an array
-				const loadedGames = Object.keys(data).map((key) => {
-					return {
-						id: key,
-						...data[key],
-					};
-				});
+
+				const data = await response.json();
+				const loadedGames = Object.keys(data).map((key) => ({
+					id: key,
+					...data[key],
+				}));
 				setGames(loadedGames);
-			})
-			.catch((error) => {
+			} catch (error) {
 				console.error("Error fetching data: ", error);
-			});
+			}
+		};
+
+		fetchData();
 	}, []);
 
 	return (
 		<IonPage>
 			<IonHeader className="ion-no-border">
 				<IonToolbar>
-					<IonTitle>Your next game</IonTitle>
+					<IonTitle>Home</IonTitle>
 				</IonToolbar>
 			</IonHeader>
 			<IonContent fullscreen>
-				<IonHeader collapse="condense">
-					<IonToolbar>
-						<IonTitle size="large">Your next game</IonTitle>
-					</IonToolbar>
-				</IonHeader>
 				{games.map((game) => (
 					<CardNextGame
 						key={game.id}

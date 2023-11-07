@@ -1,0 +1,16 @@
+.custom-chip {
+	padding: 5px 8px;
+	border-radius: 4px;
+	font-size: 0.75rem;
+	font-family: Open Sans;
+	font-weight: 700;
+	word-wrap: break-word;
+	gap: 4px;
+}
+
+.custom-icon {
+	margin: 0;
+}
+.ion-card {
+	flex-basis: 100%;
+}

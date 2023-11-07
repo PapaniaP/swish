@@ -18,3 +18,8 @@ ion-title {
 ion-toolbar {
 	border-bottom: solid 1px var(--grey-mid);
 }
+
+ion-card-title {
+	font-family: "Teko";
+	font-size: 1.75rem;
+}
