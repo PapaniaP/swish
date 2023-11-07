@@ -77,12 +77,14 @@ const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 				</IonItem>
 
 				<IonItem lines="full">
-					<IonIcon
-						aria-hidden="true"
-						icon={timeOutline}
-						slot="start"
-					></IonIcon>
-					<IonLabel>{gameInfo.time}</IonLabel>
+					<p>
+						<IonIcon
+							aria-hidden="true"
+							icon={timeOutline}
+							slot="start"
+						></IonIcon>
+						<IonLabel>{gameInfo.time}</IonLabel>
+					</p>
 				</IonItem>
 				<IonItem>
 					<IonAvatar slot="start">
