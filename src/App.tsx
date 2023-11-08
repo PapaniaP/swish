@@ -52,6 +52,7 @@ import ChatsPage from "./pages/ChatsPage";
 import ProfilePage from "./pages/ProfilePage";
 import ErrorPage from "./pages/ErrorPage";
 import GameDetailsPage from "./pages/GameDetailsPage";
+import { GameInfo } from "../src/components/CardNextGame";
 
 setupIonicReact();
 
@@ -88,7 +89,7 @@ const App: React.FC = () => (
 					</Route>
 					{/* Routing the path of /gamedetails to the profile page */}
 					<Route path="/gamedetails/:id">
-						<GameDetailsPage />
+						<GameDetailsPage gameInfo={id} />
 					</Route>
 					{/* Routing an emoty path of / to the home page */}
 					<Route

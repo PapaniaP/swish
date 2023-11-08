@@ -1,4 +1,3 @@
-import { Route } from "react-router-dom";
 import {
 	IonContent,
 	IonHeader,
@@ -6,16 +5,35 @@ import {
 	IonTitle,
 	IonToolbar,
 	IonSearchbar,
-	IonButton,
-	IonIcon,
-	IonRouterOutlet,
+	IonItem,
+	IonLabel,
+	IonSelect,
+	IonSelectOption,
 } from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
 import "./SearchPage.css";
-import { filter } from "ionicons/icons";
-import FilterPage from "./FilterPage";
+import useApi from "../hooks/useAPI";
+import { useEffect, useState } from "react";
 
 const SearchPage: React.FC = () => {
+	const { searchData } = useApi();
+
+	const [searchTerm, setSearchTerm] = useState("");
+	const [type, setType] = useState("");
+	const [results, setResults] = useState([]);
+
+	useEffect(() => {
+		if (searchTerm === "") {
+			setResults([]);
+			return;
+		}
+
+		const loadData = async () => {
+			const result = await searchData(searchTerm, type);
+			console.log("💥~ file: Home.tsx:31 ~ loadData ~ result", result);
+		};
+		loadData();
+	}, [searchTerm]);
+
 	return (
 		<IonPage>
 			<IonHeader>
@@ -29,13 +47,25 @@ const SearchPage: React.FC = () => {
 						<IonTitle size="large">SearchPage</IonTitle>
 					</IonToolbar>
 				</IonHeader>
-				<IonSearchbar placeholder="Search for Games">
-					{" "}
-					<IonButton>
-						{" "}
-						<IonIcon icon={filter}></IonIcon>
-					</IonButton>
-				</IonSearchbar>
+				<IonSearchbar
+					value={searchTerm}
+					debounce={300}
+					onIonChange={(e) => setSearchTerm(e.detail.value!)}
+					placeholder="Search for Games"
+				></IonSearchbar>
+
+				<IonItem>
+					<IonLabel>Select Searhtype</IonLabel>
+					<IonSelect
+						value={type}
+						onIonChange={(e) => setType(e.detail.value!)}
+					>
+						<IonSelectOption value="">All</IonSelectOption>
+						<IonSelectOption value="movie">Movie</IonSelectOption>
+						<IonSelectOption value="series">Series</IonSelectOption>
+						<IonSelectOption value="episode">episode</IonSelectOption>
+					</IonSelect>
+				</IonItem>
 			</IonContent>
 		</IonPage>
 	);

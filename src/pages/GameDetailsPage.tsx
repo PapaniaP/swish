@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import {
 	IonBackButton,
 	IonButtons,
@@ -9,37 +10,14 @@ import {
 	IonToolbar,
 } from "@ionic/react";
 import { shareSocialOutline } from "ionicons/icons";
-import React, { useEffect, useState } from "react";
 import { GameInfo } from "../components/CardNextGame";
 
-const GameDetailsPage: React.FC = () => {
-	const [gameDetails, setGameDetails] = useState<GameInfo[]>([]);
+type GameDetailsPageProps = {
+	gameInfo: GameInfo;
+};
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const url = `https://swish-cc699-default-rtdb.europe-west1.firebasedatabase.app/games.json`;
-				const response = await fetch(url);
-
-				if (!response.ok) {
-					throw new Error("Network response was not ok");
-				}
-
-				const data = await response.json();
-				const loadedGame = Object.keys(data).map((key) => ({
-					id: key,
-					...data[key],
-				}));
-				setGameDetails(loadedGame);
-			} catch (error) {
-				console.error("Error fetching data: ", error);
-			}
-		};
-
-		fetchData();
-	}, []);
-
-	const selectedGame = [...gameDetails];
+const GameDetailsPage: React.FC<GameDetailsPageProps> = ({ gameInfo }) => {
+	const { gameInfo } = props;
 
 	return (
 		<IonPage>
