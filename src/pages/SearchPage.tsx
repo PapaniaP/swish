@@ -9,17 +9,22 @@ import {
   IonLabel,
   IonSelect,
   IonSelectOption,
+  IonList,
+  useIonAlert,
+  useIonLoading,
 } from "@ionic/react";
 import "./SearchPage.css";
-import useApi from "../hooks/useApi";
+import useApi, { SearchResult, SearchType } from "../hooks/useApi";
 import { useEffect, useState } from "react";
 
 const SearchPage: React.FC = () => {
   const { searchData } = useApi();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [type, setType] = useState("");
-  const [results, setResults] = useState([]);
+  const [type, setType] = useState<SearchType>(SearchType.all);
+  const [results, setResults] = useState<SearchResult[]>([]);
+  const [presentAlert] = useIonAlert();
+  const [loading, dismiss] = useIonLoading();
 
   useEffect(() => {
     if (searchTerm === "") {
@@ -28,8 +33,15 @@ const SearchPage: React.FC = () => {
     }
 
     const loadData = async () => {
-      const result = await searchData(searchTerm, type);
-      console.log("💥~ file: Home.tsx:31 ~ loadData ~ result", result);
+      await loading();
+      const result: any = await searchData(searchTerm, type);
+      console.log("💥~ file: SearchPage.tsx:31 ~ loadData ~ result", result);
+      await dismiss();
+      if (result?.Error) {
+        presentAlert(result.Error);
+      } else {
+        setResults(result);
+      }
     };
     loadData();
   }, [searchTerm]);
@@ -55,7 +67,7 @@ const SearchPage: React.FC = () => {
         ></IonSearchbar>
 
         <IonItem>
-          <IonLabel>Select Searhtype</IonLabel>
+          <IonLabel>Select Searchtype</IonLabel>
           <IonSelect value={type} onIonChange={(e) => setType(e.detail.value!)}>
             <IonSelectOption value="">All</IonSelectOption>
             <IonSelectOption value="movie">Movie</IonSelectOption>
@@ -63,6 +75,14 @@ const SearchPage: React.FC = () => {
             <IonSelectOption value="episode">episode</IonSelectOption>
           </IonSelect>
         </IonItem>
+
+        <IonList>
+          {results.map((item: SearchResult) => (
+            <IonItem>
+              <IonLabel>{item.gameName}</IonLabel>
+            </IonItem>
+          ))}
+        </IonList>
       </IonContent>
     </IonPage>
   );
