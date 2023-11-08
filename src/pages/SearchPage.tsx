@@ -14,7 +14,7 @@ import {
 	useIonLoading,
 } from "@ionic/react";
 import "./SearchPage.css";
-import useApi, { SearchResult, SearchType } from "../hooks/useApi";
+import useApi, { SearchResult, SearchType } from "../hooks/useAPI";
 import { useEffect, useState } from "react";
 
 const SearchPage: React.FC = () => {

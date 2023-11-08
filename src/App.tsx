@@ -89,7 +89,7 @@ const App: React.FC = () => (
 					</Route>
 					{/* Routing the path of /gamedetails to the profile page */}
 					<Route path="/gamedetails/:id">
-						<GameDetailsPage gameInfo={id} />
+						<GameDetailsPage />
 					</Route>
 					{/* Routing an emoty path of / to the home page */}
 					<Route
