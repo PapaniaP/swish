@@ -23,11 +23,16 @@ import {
 export type GameInfo = {
 	id: number;
 	gameName: string;
-	gameType: "Indoor" | "Outdoor";
+	skillLeven: string;
+	gameDescription: string;
+	court: {
+		courtImage: string;
+		location: string;
+		gameType: "Indoor" | "Outdoor";
+	};
 	gameSize: number;
 	availableSpots: number;
 	time: string;
-	location: string;
 	organiser: {
 		image: string;
 		name: string;
@@ -53,7 +58,7 @@ const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 						color="secondary"
 						outline={true}
 					>
-						{gameInfo.gameType}
+						{gameInfo.court.gameType}
 					</IonChip>
 					<IonChip
 						className="custom-chip"
@@ -98,7 +103,7 @@ const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 						icon={pinOutline}
 						slot="start"
 					></IonIcon>
-					<IonLabel>{gameInfo.location}</IonLabel>
+					<IonLabel>{gameInfo.court.location}</IonLabel>
 				</IonItem>
 				<IonItem lines="full">
 					<IonAvatar slot="start">
@@ -119,7 +124,8 @@ const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 						icon={checkmarkDoneCircle}
 						slot="start"
 					></IonIcon>
-					<IonLabel color="success">Double confirmation</IonLabel>
+					{/*Placeholder for confirmation function  */}
+					<IonLabel color="success">Double confirmation</IonLabel>{" "}
 				</IonItem>
 			</IonCardContent>
 		</IonCard>
