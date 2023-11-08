@@ -5,6 +5,28 @@ export enum SearchType {
   episode = "episode",
 }
 
+export interface SearchResult {
+  gameName: string;
+  skillLeven: string;
+  court: {
+    courtImage: string;
+    location: string;
+    gameType: "Indoor" | "Outdoor";
+  };
+  gameSize: number;
+  availableSpots: number;
+  time: string;
+  organiser: {
+    image: string;
+    name: string;
+  };
+}
+
+export interface SearchError {
+  Response: string;
+  Error: string;
+}
+
 export interface DetailsResult {
   id: number;
   gameName: string;
@@ -27,7 +49,10 @@ export interface DetailsResult {
 export const useApi = () => {
   const url = `https://swish-cc699-default-rtdb.europe-west1.firebasedatabase.app/games.json`;
 
-  const searchData = async (title: string, type: SearchType): Promise<any> => {
+  const searchData = async (
+    title: string,
+    type: SearchType
+  ): Promise<SearchResult[] | SearchError> => {
     const result = await fetch(`${url}?s=${encodeURI(title)}&type=${type}`);
     return result.json();
   };

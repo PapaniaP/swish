@@ -9,9 +9,12 @@ import {
 	IonLabel,
 	IonSelect,
 	IonSelectOption,
+	IonList,
+	useIonAlert,
+	useIonLoading,
 } from "@ionic/react";
 import "./SearchPage.css";
-import useApi from "../hooks/useAPI";
+import useApi, { SearchResult, SearchType } from "../hooks/useApi";
 import { useEffect, useState } from "react";
 
 const SearchPage: React.FC = () => {
