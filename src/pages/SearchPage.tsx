@@ -29,8 +29,7 @@ const SearchPage: React.FC = () => {
             <IonTitle size="large">SearchPage</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="SearchPage" />
-        <IonSearchbar placeholder="Custom Placeholder">
+        <IonSearchbar placeholder="Search for Games">
           {" "}
           <IonButton>
             {" "}
