@@ -16,7 +16,6 @@ const CreatePage: React.FC = () => {
 						<IonTitle size="large">CreatePage</IonTitle>
 					</IonToolbar>
 				</IonHeader>
-				<ExploreContainer name="CreatePage" />
 			</IonContent>
 		</IonPage>
 	);

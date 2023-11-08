@@ -16,7 +16,6 @@ const ChatsPage: React.FC = () => {
 						<IonTitle size="large">ChatsPage</IonTitle>
 					</IonToolbar>
 				</IonHeader>
-				<ExploreContainer name="ChatsPage" />
 			</IonContent>
 		</IonPage>
 	);

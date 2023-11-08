@@ -13,16 +13,26 @@ import {
 	IonChip,
 	IonIcon,
 } from "@ionic/react";
-import { peopleOutline, pinOutline, timeOutline } from "ionicons/icons";
+import {
+	checkmarkDoneCircle,
+	peopleOutline,
+	pinOutline,
+	timeOutline,
+} from "ionicons/icons";
 
 export type GameInfo = {
 	id: number;
 	gameName: string;
-	gameType: "Indoor" | "Outdoor";
+	skillLeven: string;
+	gameDescription: string;
+	court: {
+		courtImage: string;
+		location: string;
+		gameType: "Indoor" | "Outdoor";
+	};
 	gameSize: number;
 	availableSpots: number;
 	time: string;
-	location: string;
 	organiser: {
 		image: string;
 		name: string;
@@ -35,6 +45,7 @@ type CardNextGameProps = {
 
 const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 	const numberOfPeople = gameInfo.gameSize - gameInfo.availableSpots;
+	const numberOfOthers = numberOfPeople - 1;
 	return (
 		<IonCard>
 			<IonCardContent>
@@ -47,7 +58,7 @@ const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 						color="secondary"
 						outline={true}
 					>
-						{gameInfo.gameType}
+						{gameInfo.court.gameType}
 					</IonChip>
 					<IonChip
 						className="custom-chip"
@@ -92,13 +103,29 @@ const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 						icon={pinOutline}
 						slot="start"
 					></IonIcon>
-					<IonLabel>{gameInfo.location}</IonLabel>
+					<IonLabel>{gameInfo.court.location}</IonLabel>
 				</IonItem>
-				<IonItem>
+				<IonItem lines="full">
 					<IonAvatar slot="start">
 						<IonImg src={gameInfo.organiser.image} />
 					</IonAvatar>
-					<IonLabel>{gameInfo.organiser.name}</IonLabel>
+					<IonLabel>
+						<p className="label-p">
+							<strong>Game Organizer</strong>
+						</p>
+						<p className="label-p">@{gameInfo.organiser.name}</p>
+					</IonLabel>
+				</IonItem>
+				<IonItem lines="none">
+					<IonIcon
+						className="label-icon"
+						aria-hidden="true"
+						color="success"
+						icon={checkmarkDoneCircle}
+						slot="start"
+					></IonIcon>
+					{/*Placeholder for confirmation function  */}
+					<IonLabel color="success">Double confirmation</IonLabel>{" "}
 				</IonItem>
 			</IonCardContent>
 		</IonCard>

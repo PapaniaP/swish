@@ -4,6 +4,8 @@ import "./HomePage.css";
 import CardNextGame from "../components/CardNextGame";
 import { GameInfo } from "../components/CardNextGame";
 
+import EmptyStateHome from "../components/EmptyStateHome";
+
 const HomePage: React.FC = () => {
 	const [games, setGames] = useState<GameInfo[]>([]);
 
@@ -31,6 +33,16 @@ const HomePage: React.FC = () => {
 		fetchData();
 	}, []);
 
+	// sort games based on time
+	const sortedGames = [...games].sort((a, b) => {
+		const dateA = new Date(a.time);
+		const dateB = new Date(b.time);
+		return dateA.getTime() - dateB.getTime();
+	});
+
+	// Render the first game from new array
+	const nextGame = sortedGames.length > 0 ? sortedGames[0] : null;
+
 	return (
 		<IonPage>
 			<IonHeader className="ion-no-border">
@@ -39,12 +51,14 @@ const HomePage: React.FC = () => {
 				</IonToolbar>
 			</IonHeader>
 			<IonContent fullscreen>
-				{games.map((game) => (
+				{nextGame ? (
 					<CardNextGame
-						key={game.id}
-						gameInfo={game}
+						key={nextGame.id}
+						gameInfo={nextGame}
 					/>
-				))}
+				) : (
+					<EmptyStateHome /> // needs to be done
+				)}
 			</IonContent>
 		</IonPage>
 	);
