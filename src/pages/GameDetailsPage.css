@@ -1,0 +1,8 @@
+ion-title {
+	font-family: "Teko";
+	font-size: 1.75rem;
+}
+
+ion-toolbar {
+	border-bottom: solid 1px var(--grey-mid);
+}
