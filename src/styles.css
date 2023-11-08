@@ -1,5 +1,10 @@
 /* Global CSS file */
 
+.greyButton {
+	background-color: var(--grey-mid) !important;
+	color: var(--grey-dark) !important;
+}
+
 ion-tab-bar {
 	--background: var(--main-white);
 	border-radius: 8px 8px 0px 0px;

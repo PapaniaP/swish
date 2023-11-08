@@ -1,27 +1,27 @@
 import { Redirect, Route } from "react-router-dom";
 import {
-  IonApp,
-  IonIcon,
-  IonLabel,
-  IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs,
-  setupIonicReact,
+	IonApp,
+	IonIcon,
+	IonLabel,
+	IonRouterOutlet,
+	IonTabBar,
+	IonTabButton,
+	IonTabs,
+	setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import {
-  addCircleOutline,
-  chatbubble,
-  chatbubbleOutline,
-  ellipse,
-  home,
-  homeOutline,
-  person,
-  personOutline,
-  searchOutline,
-  square,
-  triangle,
+	addCircleOutline,
+	chatbubble,
+	chatbubbleOutline,
+	ellipse,
+	home,
+	homeOutline,
+	person,
+	personOutline,
+	searchOutline,
+	square,
+	triangle,
 } from "ionicons/icons";
 
 /* Core CSS required for Ionic components to work properly */
@@ -51,64 +51,72 @@ import CreatePage from "./pages/CreatePage";
 import ChatsPage from "./pages/ChatsPage";
 import ProfilePage from "./pages/ProfilePage";
 import ErrorPage from "./pages/ErrorPage";
+import DisclaimerPage from "./pages/DisclaimerPage";
+import DisclaimerBookingPage from "./pages/DisclaimerBookingPage";
 
 setupIonicReact();
 
 const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          {/* Routing the path of /home to the home page */}
-          <Route exact path="/home">
-            <HomePage />
-          </Route>
-          {/* Routing the path of /search to the search page */}
-          <Route exact path="/search">
-            <SearchPage />
-          </Route>
-          {/* Routing the path of /create to the create page */}
-          <Route path="/create">
-            <CreatePage />
-          </Route>
-          {/* Routing the path of /chats to the chats page */}
-          <Route path="/chats">
-            <ChatsPage />
-          </Route>
-          {/* Routing the path of /profile to the profile page */}
-          <Route path="/profile">
-            <ProfilePage />
-          </Route>
-          {/* Routing an emoty path of / to the home page */}
-          <Route exact path="/">
-            <Redirect to="/home" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="home" href="/home">
-            <IonIcon aria-hidden="true" icon={homeOutline} />
-            <IonLabel>Home</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="search" href="/search">
-            <IonIcon aria-hidden="true" icon={searchOutline} />
-            <IonLabel>Search</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="create" href="/create">
-            <IonIcon aria-hidden="true" icon={addCircleOutline} />
-            <IonLabel>Create</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="chats" href="/chats">
-            <IonIcon aria-hidden="true" icon={chatbubbleOutline} />
-            <IonLabel>Chats</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="profile" href="/profile">
-            <IonIcon aria-hidden="true" icon={personOutline} />
-            <IonLabel>Profile</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
+	<IonApp>
+		<IonReactRouter>
+			<IonTabs>
+				<IonRouterOutlet>
+					{/* Routing the path of /home to the home page */}
+					<Route exact path="/home">
+						<HomePage />
+					</Route>
+					{/* Routing the path of /search to the search page */}
+					<Route exact path="/search">
+						<SearchPage />
+					</Route>
+					{/* Routing the path of /create to the create page */}
+					<Route path="/create">
+						<CreatePage />
+					</Route>
+					{/* Routing the path of /chats to the chats page */}
+					<Route path="/chats">
+						<ChatsPage />
+					</Route>
+					{/* Routing the path of /profile to the profile page */}
+					<Route path="/profile">
+						<ProfilePage />
+					</Route>
+					<Route path="/disclaimer">
+						<DisclaimerPage />
+					</Route>
+					<Route path="/disclaimerbookingpage">
+						<DisclaimerBookingPage />
+					</Route>
+					{/* Routing an emoty path of / to the home page */}
+					<Route exact path="/">
+						<Redirect to="/home" />
+					</Route>
+				</IonRouterOutlet>
+				<IonTabBar slot="bottom">
+					<IonTabButton tab="home" href="/home">
+						<IonIcon aria-hidden="true" icon={homeOutline} />
+						<IonLabel>Home</IonLabel>
+					</IonTabButton>
+					<IonTabButton tab="search" href="/search">
+						<IonIcon aria-hidden="true" icon={searchOutline} />
+						<IonLabel>Search</IonLabel>
+					</IonTabButton>
+					<IonTabButton tab="create" href="/create">
+						<IonIcon aria-hidden="true" icon={addCircleOutline} />
+						<IonLabel>Create</IonLabel>
+					</IonTabButton>
+					<IonTabButton tab="chats" href="/chats">
+						<IonIcon aria-hidden="true" icon={chatbubbleOutline} />
+						<IonLabel>Chats</IonLabel>
+					</IonTabButton>
+					<IonTabButton tab="profile" href="/profile">
+						<IonIcon aria-hidden="true" icon={personOutline} />
+						<IonLabel>Profile</IonLabel>
+					</IonTabButton>
+				</IonTabBar>
+			</IonTabs>
+		</IonReactRouter>
+	</IonApp>
 );
 
 export default App;
