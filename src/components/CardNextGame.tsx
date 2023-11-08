@@ -23,7 +23,7 @@ import {
 export type GameInfo = {
 	id: number;
 	gameName: string;
-	skillLeven: string;
+	skillLevel: string;
 	gameDescription: string;
 	court: {
 		courtImage: string;
@@ -65,7 +65,7 @@ const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 						color="secondary"
 						outline={true}
 					>
-						{gameInfo.gameSize}
+						{gameInfo.skillLevel}
 					</IonChip>
 
 					<IonChip
