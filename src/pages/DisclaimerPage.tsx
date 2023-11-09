@@ -19,6 +19,9 @@ const DisclaimerPage: React.FC = () => {
                     <p className="ion-text-center">All outdoor courts are public and not reserved for your game only. You may find other people there.</p>
                 </div>
             </IonContent>
+            <IonButton expand="block" className="ion-padding" slot="end" routerLink="/disclaimerbookingpage">
+                Next
+            </IonButton>
         </IonPage >
     );
 };

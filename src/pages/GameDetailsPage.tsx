@@ -17,7 +17,7 @@ type GameDetailsPageProps = {
 };
 
 const GameDetailsPage: React.FC<GameDetailsPageProps> = ({ gameInfo }) => {
-	const { gameInfo } = props;
+	// const { gameInfo } = props; this does not make sense to me, Samo
 
 	return (
 		<IonPage>
