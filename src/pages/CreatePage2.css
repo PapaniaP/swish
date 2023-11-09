@@ -11,5 +11,24 @@ main {
 }
 
 .nameGame {
-    padding-top: 1rem;
+    padding-top: 2rem;
+}
+
+.dateButtons {
+    display: flex;
+    justify-content: start;
+    padding-left: 0.8rem;
+    --background: white;
+}
+
+.timepickerStrong {
+    padding: 0 1rem;
+
+}
+
+.timepickerContainer {
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }

@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonTextarea, IonSelect, IonSelectOption } from "@ionic/react";
+import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonTextarea, IonSelect, IonSelectOption, IonDatetime, IonDatetimeButton, IonModal, IonCheckbox } from "@ionic/react";
 import "./CreatePage2.css";
 import "../styles.css"
 import "../theme/variables.css"
@@ -6,10 +6,24 @@ import { addOutline } from "ionicons/icons";
 import React, { useState, useEffect } from "react";
 import Court from "../components/Court";
 import { CourtInfo } from "../components/Court";
-import Timepicker from "../components/timepicker";
-import Equipment from "../components/Equipment";
 
 const CreatePage2: React.FC = () => {
+
+    // const newGame = {
+    //     id: id,
+    //     gameName: gameName,
+    //     skillLevel: skillLevel,
+    //     gameDescription: gameDescription,
+    //     court: {},
+    //     gameSize: gameSize,
+    //     availableSpots: "",
+    //     time: time,
+    //     organiser: {
+    //         image: "",
+    //         name: ""
+    //     }
+    // }
+
     return (
         <IonPage>
             <IonHeader>
@@ -52,8 +66,26 @@ const CreatePage2: React.FC = () => {
                         </IonSelect>
                     </IonItem>
                     <div className="timeAndEquipment">
-                        <Timepicker />
-                        <Equipment />
+                        <div className='timepickerContainer'>
+                            <strong className='timepickerStrong'>Select a date and time</strong>
+                            <IonDatetimeButton className='dateButtons' slot='start' datetime="datetime"></IonDatetimeButton>
+
+                            <IonModal keepContentsMounted={true} >
+                                <IonDatetime showDefaultButtons={true} id="datetime"></IonDatetime>
+                            </IonModal>
+                        </div>
+                        <div>
+                            <div className="text">
+                                <strong>Equipment</strong>
+                                <p>Check off equipment you have. Players who join your game will have the same option</p>
+                            </div>
+                            <IonItem>
+                                <IonCheckbox justify="space-between">Ball</IonCheckbox>
+                            </IonItem>
+                            <IonItem>
+                                <IonCheckbox justify="space-between">Pump</IonCheckbox>
+                            </IonItem>
+                        </div>
                     </div>
                 </main>
             </IonContent>
