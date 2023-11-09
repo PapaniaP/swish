@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./CardNextGame.css";
 import "./Court.css";
+import GameFetcher from "./GameFetcher";
+
 import {
 	IonCard,
 	IonCardContent,
-	IonCardHeader,
-	IonCardSubtitle,
 	IonCardTitle,
 	IonItem,
 	IonLabel,
-	IonAvatar,
-	IonImg,
 	IonChip,
 	IonIcon,
+	IonAvatar,
+	IonImg,
 } from "@ionic/react";
 import {
 	checkmarkDoneCircle,
@@ -22,7 +22,7 @@ import {
 } from "ionicons/icons";
 
 export type GameInfo = {
-	id: string;
+	id: number;
 	gameName: string;
 	skillLevel: string;
 	gameDescription: string;

@@ -5,18 +5,18 @@ import "../theme/variables.css"
 import { addOutline } from "ionicons/icons";
 import React, { useState, useEffect } from "react";
 import Court from "../components/Court";
-import { GameInfo } from "../components/CardNextGame";
+import { CourtInfo } from "../components/Court";
 
 import EmptyStateHome from "../components/EmptyStateHome";
 
 const CreatePage: React.FC = () => {
 
-	const [games, setGames] = useState<GameInfo[]>([]);
+	const [courts, setCourts] = useState<CourtInfo[]>([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const url = `https://swish-cc699-default-rtdb.europe-west1.firebasedatabase.app/games.json`;
+				const url = `https://swish-cc699-default-rtdb.europe-west1.firebasedatabase.app/Courts.json`;
 				const response = await fetch(url);
 
 				if (!response.ok) {
@@ -24,11 +24,11 @@ const CreatePage: React.FC = () => {
 				}
 
 				const data = await response.json();
-				const loadedGames = Object.keys(data).map((key) => ({
+				const loadedCourts = Object.keys(data).map((key) => ({
 					id: key,
 					...data[key],
 				}));
-				setGames(loadedGames);
+				setCourts(loadedCourts);
 			} catch (error) {
 				console.error("Error fetching data: ", error);
 			}
@@ -36,16 +36,6 @@ const CreatePage: React.FC = () => {
 
 		fetchData();
 	}, []);
-
-	// sort games based on time
-	const sortedGames = [...games].sort((a, b) => {
-		const dateA = new Date(a.time);
-		const dateB = new Date(b.time);
-		return dateA.getTime() - dateB.getTime();
-	});
-
-	// Render the first game from new array
-	const nextGame = sortedGames.length > 0 ? sortedGames[0] : null;
 
 	return (
 		<IonPage>
@@ -55,7 +45,6 @@ const CreatePage: React.FC = () => {
 					<div className="progressBar ion-padding-end" slot="end">
 						<IonButton color="primary" size="small">1</IonButton>
 						<IonButton fill="outline" disabled={true} size="small">2</IonButton>
-						<IonButton fill="outline" disabled={true} size="small">3</IonButton>
 					</div>
 				</IonToolbar>
 			</IonHeader>
@@ -69,17 +58,17 @@ const CreatePage: React.FC = () => {
 						<IonButton fill="clear" color="dark" size="small"><IonIcon slot="end" icon={addOutline}></IonIcon><p>Add a court</p></IonButton>
 					</div>
 					<IonSearchbar className="no-padding"></IonSearchbar>
-					{nextGame ? (
+					{courts.map((court) => (
 						<Court
-							key={nextGame.id}
-							gameInfo={nextGame}
+							key={court.id}
+							CourtInfo={court}
 						/>
-					) : (
-						<EmptyStateHome /> // needs to be done
-					)}
+					))}
+
+
 				</main>
 			</IonContent>
-			<IonButton expand="block" className="ion-padding" slot="end" routerLink="/disclaimerbookingpage">
+			<IonButton expand="block" className="ion-padding" slot="end" routerLink="/create2">
 				Next
 			</IonButton>
 		</IonPage>
