@@ -26,8 +26,8 @@ const CreatePage: React.FC = () => {
 						</div>
 						<IonButton fill="clear" color="dark" size="small"><IonIcon slot="end" icon={addOutline}></IonIcon><p>Add a court</p></IonButton>
 					</div>
-
 					<IonSearchbar className="no-padding"></IonSearchbar>
+
 				</main>
 			</IonContent>
 			<IonButton expand="block" className="ion-padding" slot="end" routerLink="/disclaimerbookingpage">
