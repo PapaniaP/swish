@@ -93,6 +93,10 @@ const App: React.FC = () => (
 					<Route path="/games">
 						<GamesList />
 					</Route>
+					<Route path="/games/:gameId">
+						<EditPage />
+					</Route>
+
 					{/* Routing the path of /editpage to render the game in the edit page */}
 					<Route path="/editpage">
 						<EditPage />

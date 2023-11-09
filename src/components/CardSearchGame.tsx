@@ -37,6 +37,9 @@ const CardSearchGame: React.FC<CardSearchGameProps> = ({ searchInfo }) => {
 	const history = useHistory();
 
 	const numberOfPeople = searchInfo.availableSpots;
+	const navigateToGameDetails = () => {
+		history.push(`/editpage/${searchInfo.id}`);
+	};
 	return (
 		<IonCard
 			className="ion-card-click"
@@ -103,7 +106,7 @@ const CardSearchGame: React.FC<CardSearchGameProps> = ({ searchInfo }) => {
 					<IonButton
 						className="buttons-split"
 						fill="outline"
-						routerLink="/editpage"
+						onClick={navigateToGameDetails}
 					>
 						Edit Game
 					</IonButton>
