@@ -21,14 +21,11 @@ export type SearchInfo = {
 		courtImage: string;
 		location: string;
 		gameType: "Indoor" | "Outdoor";
+		id: string;
 	};
-	gameSize: number;
+	gameSize: string;
 	availableSpots: number;
 	time: string;
-	organiser: {
-		image: string;
-		name: string;
-	};
 };
 
 type CardSearchGameProps = {
@@ -38,7 +35,7 @@ type CardSearchGameProps = {
 const CardSearchGame: React.FC<CardSearchGameProps> = ({ searchInfo }) => {
 	const history = useHistory();
 
-	const numberOfPeople = searchInfo.gameSize - searchInfo.availableSpots;
+	const numberOfPeople = searchInfo.availableSpots;
 	return (
 		<IonCard
 			className="ion-card-click"
@@ -75,7 +72,7 @@ const CardSearchGame: React.FC<CardSearchGameProps> = ({ searchInfo }) => {
 							aria-hidden="true"
 							icon={peopleOutline}
 						/>
-						{`${numberOfPeople} / ${searchInfo.gameSize}`}
+						{`${numberOfPeople}`}
 					</IonChip>
 				</IonItem>
 
@@ -99,7 +96,7 @@ const CardSearchGame: React.FC<CardSearchGameProps> = ({ searchInfo }) => {
 						icon={pinOutline}
 						slot="start"
 					></IonIcon>
-					<IonLabel>{searchInfo.court && searchInfo.court.gameType}</IonLabel>
+					<IonLabel>{searchInfo.court && searchInfo.court.location}</IonLabel>
 				</IonItem>
 			</IonCardContent>
 		</IonCard>
