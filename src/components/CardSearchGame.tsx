@@ -1,37 +1,110 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { GameInfo } from "../components/CardSearchGame";
+import React from "react";
+import { useHistory } from "react-router";
+import "./CardSearchGame.css";
+import {
+	IonCard,
+	IonCardContent,
+	IonCardTitle,
+	IonItem,
+	IonLabel,
+	IonChip,
+	IonIcon,
+} from "@ionic/react";
+import { peopleOutline, pinOutline, timeOutline } from "ionicons/icons";
 
-interface GameDetailsPageProps {
-	games: GameInfo[];
-}
+export type GameInfo = {
+	id: string;
+	gameName: string;
+	skillLevel: string;
+	gameDescription: string;
+	court: { courtImage: string; location: string; gameType: "Indoor" | "Outdoor" };
+	gameSize: number;
+	availableSpots: number;
+	time: string;
+	organiser: {
+		image: string;
+		name: string;
+	};
+};
 
-function GameDetailsPage({ games }: GameDetailsPageProps) {
-	const { id } = useParams<{ id: string }>();
-	const [game, setGame] = useState<GameInfo | null>(null);
+type CardSearchGameProps = {
+	gameInfo: GameInfo;
+};
 
-	useEffect(() => {
-		const gameId = parseInt(id, 10);
+const CardSearchGame: React.FC<CardSearchGameProps> = ({ gameInfo }) => {
+	const history = useHistory();
 
-		// Use a different variable name for the map function to avoid conflicts
-		const fetchedGame = games.find((g) => g.id === gameId.toString());
-		setGame(fetchedGame || null);
-	}, [games, id]);
+	const handleCardClick = (id: string) => {
+		history.push(`/gamedetails/${gameInfo.id}`);
+	};
 
+	const numberOfPeople = gameInfo.gameSize - gameInfo.availableSpots;
 	return (
-		<div>
-			<h1>Game Details</h1>
-			{game ? (
-				<div>
-					<h2>{game.gameName}</h2>
-					<p>{game.skillLevel}</p>
-					{/* Render other game details */}
-				</div>
-			) : (
-				<p>Game not found</p>
-			)}
-		</div>
-	);
-}
+		<IonCard
+			className="ion-card-click"
+			key={gameInfo.id}
+			onClick={() => handleCardClick(gameInfo.id)}
+		>
+			<IonCardContent>
+				<IonItem
+					className="tag-container no-margin"
+					lines="none"
+				>
+					<IonChip
+						className="custom-chip"
+						color="secondary"
+						outline={true}
+					>
+						{gameInfo.court.gameType}
+					</IonChip>
+					<IonChip
+						className="custom-chip"
+						color="secondary"
+						outline={true}
+					>
+						{gameInfo.skillLevel}
+					</IonChip>
 
-export default GameDetailsPage;
+					<IonChip
+						className="custom-chip"
+						color="secondary"
+						outline={true}
+						slot="end"
+					>
+						<IonIcon
+							className="custom-icon"
+							aria-hidden="true"
+							icon={peopleOutline}
+						/>
+						{`${numberOfPeople} / ${gameInfo.gameSize}`}
+					</IonChip>
+				</IonItem>
+
+				<IonItem lines="full">
+					<IonCardTitle>{gameInfo.gameName}</IonCardTitle>
+				</IonItem>
+
+				<IonItem lines="none">
+					<IonIcon
+						className="label-icon"
+						aria-hidden="true"
+						icon={timeOutline}
+						slot="start"
+					></IonIcon>
+					<IonLabel className="time-label">{gameInfo.time}</IonLabel>
+				</IonItem>
+				<IonItem lines="full">
+					<IonIcon
+						className="label-icon"
+						aria-hidden="true"
+						icon={pinOutline}
+						slot="start"
+					></IonIcon>
+					<IonLabel>{gameInfo.court.location}</IonLabel>
+				</IonItem>
+			</IonCardContent>
+		</IonCard>
+	);
+};
+
+export default CardSearchGame;
