@@ -11,10 +11,13 @@ import {
     IonDatetime,
     IonCheckbox,
     IonItem,
-    IonLabel
+    IonLabel,
+    IonModal,
+    IonDatetimeButton
 } from "@ionic/react";
 import React, { useState, useEffect } from "react";
 import "./CreatePage2.css";
+import "./CreatePage3.css";
 import "../styles.css";
 import "../theme/variables.css";
 
@@ -109,12 +112,32 @@ const CreatePage3: React.FC = () => {
                 throw new Error('Something went wrong!');
             }
 
-            // Handle the response here. For example, clear the form or show a success message.
+            // If the game is successfully created, reset the form data
+            setFormData({
+                gameName: '',
+                gameDescription: '',
+                skillLevel: '',
+                gameSize: '',
+                court: null,
+                availableSpots: 10,
+                time: '',
+                equipment: {
+                    ball: false,
+                    pump: false
+                }
+            });
+
+            // Handle the successful response here, like showing a success message
             console.log('Game created:', await response.json());
+
+            // Optionally, navigate to the search page programmatically if needed
+            // history.push('/search'); // You would need to use useHistory from 'react-router-dom' for this
+
         } catch (error) {
             console.error('Failed to create game:', error);
         }
     };
+
 
     return (
         <IonPage>
@@ -126,15 +149,15 @@ const CreatePage3: React.FC = () => {
             <IonContent fullscreen className="ion-padding">
                 <IonItem>
                     <IonLabel position="stacked">Name of your game</IonLabel>
-                    <IonTextarea value={formData.gameName} onIonChange={e => handleInputChange('gameName', e.detail.value!)} autoGrow={true}></IonTextarea>
+                    <IonTextarea autoGrow={true} placeholder="E.g. Sunday Basketball" value={formData.gameName} onIonChange={e => handleInputChange('gameName', e.detail.value!)}></IonTextarea>
                 </IonItem>
                 <IonItem>
                     <IonLabel position="stacked">Game description</IonLabel>
-                    <IonTextarea value={formData.gameDescription} onIonChange={e => handleInputChange('gameDescription', e.detail.value!)} autoGrow={true}></IonTextarea>
+                    <IonTextarea placeholder="Any extra information for players can go here." autoGrow={true} value={formData.gameDescription} onIonChange={e => handleInputChange('gameDescription', e.detail.value!)} ></IonTextarea>
                 </IonItem>
                 <IonItem>
                     <IonLabel position="stacked">Skill level</IonLabel>
-                    <IonSelect value={formData.skillLevel} onIonChange={e => handleInputChange('skillLevel', e.detail.value)}>
+                    <IonSelect justify="space-between" label="Skill level" placeholder="Select" value={formData.skillLevel} onIonChange={e => handleInputChange('skillLevel', e.detail.value)}>
                         <IonSelectOption value="Beginner">Beginner</IonSelectOption>
                         <IonSelectOption value="Casual">Casual</IonSelectOption>
                         <IonSelectOption value="Skilled">Skilled</IonSelectOption>
@@ -143,7 +166,7 @@ const CreatePage3: React.FC = () => {
                 </IonItem>
                 <IonItem>
                     <IonLabel position="stacked">Court</IonLabel>
-                    <IonSelect
+                    <IonSelect justify="space-between" label="Skill level" placeholder="Select"
                         value={formData.court?.id} // Assuming the court object has an id
                         onIonChange={e => handleInputChange('court', courts.find(court => court.id === e.detail.value))}
                     >
@@ -156,7 +179,7 @@ const CreatePage3: React.FC = () => {
                 </IonItem>
                 <IonItem>
                     <IonLabel position="stacked">Game size</IonLabel>
-                    <IonSelect value={formData.gameSize} onIonChange={e => handleInputChange('gameSize', e.detail.value)}>
+                    <IonSelect justify="space-between" label="Skill level" placeholder="Select" value={formData.gameSize} onIonChange={e => handleInputChange('gameSize', e.detail.value)}>
                         <IonSelectOption value="1 vs 1">1 vs 1</IonSelectOption>
                         <IonSelectOption value="2 vs 2">2 vs 2</IonSelectOption>
                         <IonSelectOption value="3 vs 3">3 vs 3</IonSelectOption>
@@ -164,22 +187,33 @@ const CreatePage3: React.FC = () => {
                         <IonSelectOption value="5 vs 5">5 vs 5</IonSelectOption>
                     </IonSelect>
                 </IonItem>
-                <IonItem>
-                    <IonLabel position="stacked">Date and Time</IonLabel>
-                    <IonDatetime value={formData.time} onIonChange={e => handleInputChange('time', e.detail.value!)}></IonDatetime>
-                </IonItem>
-                <IonItem>
-                    <IonLabel>Ball</IonLabel>
-                    <IonCheckbox checked={formData.equipment.ball} onIonChange={() => handleCheckboxChange('ball')} />
-                </IonItem>
-                <IonItem>
-                    <IonLabel>Pump</IonLabel>
-                    <IonCheckbox checked={formData.equipment.pump} onIonChange={() => handleCheckboxChange('pump')} />
-                </IonItem>
-                <IonButton expand="block" onClick={handleSaveAndCreate}>
-                    Save and Create
-                </IonButton>
+                <div className="timeAndEquipment">
+                    <div className="timepickerContainer">
+                        <strong className='timepickerStrong'>Select a date and time</strong>
+                        <IonDatetimeButton datetime="datetime" className="dateButtons"></IonDatetimeButton>
+                        <IonModal keepContentsMounted={true}>
+                            <IonDatetime showDefaultButtons={true} id="datetime" value={formData.time} onIonChange={e => handleInputChange('time', e.detail.value!)}></IonDatetime>
+                        </IonModal>
+                    </div>
+                    <div>
+                        <div className="text">
+                            <strong>Equipment</strong>
+                            <p>Check off equipment you have. Players who join your game will have the same option</p>
+                        </div>
+                        <IonItem>
+                            <IonLabel>Ball</IonLabel>
+                            <IonCheckbox checked={formData.equipment.ball} onIonChange={() => handleCheckboxChange('ball')} />
+                        </IonItem>
+                        <IonItem>
+                            <IonLabel>Pump</IonLabel>
+                            <IonCheckbox checked={formData.equipment.pump} onIonChange={() => handleCheckboxChange('pump')} />
+                        </IonItem>
+                    </div>
+                </div>
             </IonContent>
+            <IonButton className="ion-padding" expand="block" slot="end" onClick={handleSaveAndCreate} routerLink="/search">
+                Save and Create
+            </IonButton>
         </IonPage>
     );
 };
