@@ -1,0 +1,15 @@
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.timeAndEquipment {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.nameGame {
+    padding-top: 1rem;
+}

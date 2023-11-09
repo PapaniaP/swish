@@ -45,7 +45,6 @@ const CreatePage: React.FC = () => {
 					<div className="progressBar ion-padding-end" slot="end">
 						<IonButton color="primary" size="small">1</IonButton>
 						<IonButton fill="outline" disabled={true} size="small">2</IonButton>
-						<IonButton fill="outline" disabled={true} size="small">3</IonButton>
 					</div>
 				</IonToolbar>
 			</IonHeader>
@@ -69,7 +68,7 @@ const CreatePage: React.FC = () => {
 
 				</main>
 			</IonContent>
-			<IonButton expand="block" className="ion-padding" slot="end" routerLink="/disclaimerbookingpage">
+			<IonButton expand="block" className="ion-padding" slot="end" routerLink="/create2">
 				Next
 			</IonButton>
 		</IonPage>

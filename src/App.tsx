@@ -55,6 +55,7 @@ import DisclaimerPage from "./pages/DisclaimerPage";
 import DisclaimerBookingPage from "./pages/DisclaimerBookingPage";
 import GameDetailsPage from "./pages/GameDetailsPage";
 import { GameInfo } from "../src/components/CardNextGame";
+import CreatePage2 from "./pages/CreatePage2";
 
 setupIonicReact();
 
@@ -103,6 +104,11 @@ const App: React.FC = () => (
 					{/* Routing the path of /disclaimerbookingpag to the disclaimer about booking the gym */}
 					<Route path="/disclaimerbookingpage">
 						<DisclaimerBookingPage />
+					</Route>
+
+					{/* Routing the path of /disclaimerbookingpag to the disclaimer about booking the gym */}
+					<Route path="/create2">
+						<CreatePage2 />
 					</Route>
 
 					{/* Routing an emoty path of / to the home page */}
