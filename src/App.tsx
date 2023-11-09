@@ -53,6 +53,8 @@ import ProfilePage from "./pages/ProfilePage";
 import ErrorPage from "./pages/ErrorPage";
 import DisclaimerPage from "./pages/DisclaimerPage";
 import DisclaimerBookingPage from "./pages/DisclaimerBookingPage";
+import GameDetailsPage from "./pages/GameDetailsPage";
+import { GameInfo } from "../src/components/CardNextGame";
 
 setupIonicReact();
 
@@ -62,11 +64,17 @@ const App: React.FC = () => (
 			<IonTabs>
 				<IonRouterOutlet>
 					{/* Routing the path of /home to the home page */}
-					<Route exact path="/home">
+					<Route
+						exact
+						path="/home"
+					>
 						<HomePage />
 					</Route>
 					{/* Routing the path of /search to the search page */}
-					<Route exact path="/search">
+					<Route
+						exact
+						path="/search"
+					>
 						<SearchPage />
 					</Route>
 					{/* Routing the path of /create to the create page */}
@@ -81,36 +89,75 @@ const App: React.FC = () => (
 					<Route path="/profile">
 						<ProfilePage />
 					</Route>
+					{/* Routing the path of /gamedetails to the profile page */}
+					<Route path="/gamedetails/:id">
+						<GameDetailsPage />
+					</Route>
+					{/* Routing the path of /disclaimer to the first disclaimer page in create game creation */}
 					<Route path="/disclaimer">
 						<DisclaimerPage />
 					</Route>
+					{/* Routing the path of /disclaimerbookingpag to the disclaimer about booking the gym */}
 					<Route path="/disclaimerbookingpage">
 						<DisclaimerBookingPage />
 					</Route>
 					{/* Routing an emoty path of / to the home page */}
-					<Route exact path="/">
+					<Route
+						exact
+						path="/"
+					>
 						<Redirect to="/home" />
 					</Route>
 				</IonRouterOutlet>
 				<IonTabBar slot="bottom">
-					<IonTabButton tab="home" href="/home">
-						<IonIcon aria-hidden="true" icon={homeOutline} />
+					<IonTabButton
+						tab="home"
+						href="/home"
+					>
+						<IonIcon
+							aria-hidden="true"
+							icon={homeOutline}
+						/>
 						<IonLabel>Home</IonLabel>
 					</IonTabButton>
-					<IonTabButton tab="search" href="/search">
-						<IonIcon aria-hidden="true" icon={searchOutline} />
+					<IonTabButton
+						tab="search"
+						href="/search"
+					>
+						<IonIcon
+							aria-hidden="true"
+							icon={searchOutline}
+						/>
 						<IonLabel>Search</IonLabel>
 					</IonTabButton>
-					<IonTabButton tab="create" href="/create">
-						<IonIcon aria-hidden="true" icon={addCircleOutline} />
+					<IonTabButton
+						tab="create"
+						href="/create"
+					>
+						<IonIcon
+							aria-hidden="true"
+							icon={addCircleOutline}
+						/>
 						<IonLabel>Create</IonLabel>
 					</IonTabButton>
-					<IonTabButton tab="chats" href="/chats">
-						<IonIcon aria-hidden="true" icon={chatbubbleOutline} />
+					<IonTabButton
+						tab="chats"
+						href="/chats"
+					>
+						<IonIcon
+							aria-hidden="true"
+							icon={chatbubbleOutline}
+						/>
 						<IonLabel>Chats</IonLabel>
 					</IonTabButton>
-					<IonTabButton tab="profile" href="/profile">
-						<IonIcon aria-hidden="true" icon={personOutline} />
+					<IonTabButton
+						tab="profile"
+						href="/profile"
+					>
+						<IonIcon
+							aria-hidden="true"
+							icon={personOutline}
+						/>
 						<IonLabel>Profile</IonLabel>
 					</IonTabButton>
 				</IonTabBar>
