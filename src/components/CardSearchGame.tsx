@@ -9,6 +9,7 @@ import {
 	IonLabel,
 	IonChip,
 	IonIcon,
+	IonButton,
 } from "@ionic/react";
 import { peopleOutline, pinOutline, timeOutline } from "ionicons/icons";
 
@@ -98,6 +99,16 @@ const CardSearchGame: React.FC<CardSearchGameProps> = ({ searchInfo }) => {
 					></IonIcon>
 					<IonLabel>{searchInfo.court && searchInfo.court.location}</IonLabel>
 				</IonItem>
+				<div className="card-buttons">
+					<IonButton
+						className="buttons-split"
+						fill="outline"
+						routerLink="/editpage"
+					>
+						Edit Game
+					</IonButton>
+					<IonButton className="buttons-split">Share Game</IonButton>
+				</div>
 			</IonCardContent>
 		</IonCard>
 	);
