@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
 	IonContent,
 	IonHeader,
@@ -10,33 +11,53 @@ import {
 	IonSelect,
 	IonSelectOption,
 	IonList,
-	useIonAlert,
-	useIonLoading,
 } from "@ionic/react";
 import "./SearchPage.css";
-import useApi, { SearchResult, SearchType } from "../hooks/useAPI";
-import { useEffect, useState } from "react";
 import GamesList from "../components/GamesList";
+import { SearchInfo } from "../components/CardSearchGame";
+import CardSearchGame from "../components/CardSearchGame";
 
 const SearchPage: React.FC = () => {
-	const { searchData } = useApi();
 
 	const [searchTerm, setSearchTerm] = useState("");
-	const [type, setType] = useState("");
-	const [results, setResults] = useState([]);
+	const [filter, setFilter] = useState("");
+	const [games, setGames] = useState<SearchInfo[]>([]);
+	const [filteredGames, setFilteredGames] = useState<SearchInfo[]>([]);
 
 	useEffect(() => {
-		if (searchTerm === "") {
-			setResults([]);
-			return;
-		}
+		const fetchData = async () => {
+			try {
+				const url = `https://swish-cc699-default-rtdb.europe-west1.firebasedatabase.app/games.json`;
+				const response = await fetch(url);
 
-		const loadData = async () => {
-			const result = await searchData(searchTerm, type);
-			console.log("💥~ file: Home.tsx:31 ~ loadData ~ result", result);
+				if (!response.ok) {
+					throw new Error("Network response was not ok");
+				}
+
+				const data = await response.json();
+				const loadedGames = Object.keys(data).map((key) => ({
+					id: key,
+					...data[key],
+				}));
+				setGames(loadedGames);
+			} catch (error) {
+				console.error("Error fetching data: ", error);
+			}
 		};
-		loadData();
-	}, [searchTerm]);
+
+		fetchData();
+	}, []);
+
+	useEffect(() => {
+		// Filter games based on search term and selected filter (indoor/outdoor)
+		const filtered = games.filter((game) => {
+			return (
+				game.gameName.toLowerCase().includes(searchTerm.toLowerCase()) &&
+				(filter === "" || game.type === filter)
+			);
+		});
+		setFilteredGames(filtered);
+	}, [searchTerm, filter, games]);
 
 	return (
 		<IonPage>
@@ -46,30 +67,31 @@ const SearchPage: React.FC = () => {
 				</IonToolbar>
 			</IonHeader>
 			<IonContent fullscreen>
-				<IonHeader collapse="condense">
-					<IonToolbar>
-						<IonTitle size="large">SearchPage</IonTitle>
-					</IonToolbar>
-				</IonHeader>
 				<IonSearchbar
 					value={searchTerm}
 					debounce={300}
-					onIonChange={(e) => setSearchTerm(e.detail.value!)}
+					onIonChange={(e) => setSearchTerm(e.detail.value)}
 					placeholder="Search for Games"
 				></IonSearchbar>
 
 				<IonItem>
-					<IonLabel>Select Searhtype</IonLabel>
+					<IonLabel>Game Type</IonLabel>
 					<IonSelect
-						value={type}
-						onIonChange={(e) => setType(e.detail.value!)}
+						value={filter}
+						placeholder="Select Type"
+						onIonChange={(e) => setFilter(e.detail.value)}
 					>
 						<IonSelectOption value="">All</IonSelectOption>
-						<IonSelectOption value="movie">Movie</IonSelectOption>
-						<IonSelectOption value="series">Series</IonSelectOption>
-						<IonSelectOption value="episode">episode</IonSelectOption>
+						<IonSelectOption value="indoor">Indoor</IonSelectOption>
+						<IonSelectOption value="outdoor">Outdoor</IonSelectOption>
 					</IonSelect>
 				</IonItem>
+
+				<IonList>
+					{filteredGames.map((game) => (
+						<CardSearchGame key={game.id} searchInfo={game} />
+					))}
+				</IonList>
 			</IonContent>
 		</IonPage>
 	);

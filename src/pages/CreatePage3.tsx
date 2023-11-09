@@ -166,7 +166,7 @@ const CreatePage3: React.FC = () => {
                 </IonItem>
                 <IonItem>
                     <IonLabel position="stacked">Court</IonLabel>
-                    <IonSelect justify="space-between" label="Skill level" placeholder="Select"
+                    <IonSelect justify="space-between" label="Court" placeholder="Select"
                         value={formData.court?.id} // Assuming the court object has an id
                         onIonChange={e => handleInputChange('court', courts.find(court => court.id === e.detail.value))}
                     >
@@ -179,7 +179,7 @@ const CreatePage3: React.FC = () => {
                 </IonItem>
                 <IonItem>
                     <IonLabel position="stacked">Game size</IonLabel>
-                    <IonSelect justify="space-between" label="Skill level" placeholder="Select" value={formData.gameSize} onIonChange={e => handleInputChange('gameSize', e.detail.value)}>
+                    <IonSelect justify="space-between" label="Game size" placeholder="Select" value={formData.gameSize} onIonChange={e => handleInputChange('gameSize', e.detail.value)}>
                         <IonSelectOption value="1 vs 1">1 vs 1</IonSelectOption>
                         <IonSelectOption value="2 vs 2">2 vs 2</IonSelectOption>
                         <IonSelectOption value="3 vs 3">3 vs 3</IonSelectOption>
@@ -187,10 +187,11 @@ const CreatePage3: React.FC = () => {
                         <IonSelectOption value="5 vs 5">5 vs 5</IonSelectOption>
                     </IonSelect>
                 </IonItem>
+
                 <div className="timeAndEquipment">
                     <div className="timepickerContainer">
                         <strong className='timepickerStrong'>Select a date and time</strong>
-                        <IonDatetimeButton datetime="datetime" className="dateButtons"></IonDatetimeButton>
+                        <IonDatetimeButton datetime="datetime"></IonDatetimeButton>
                         <IonModal keepContentsMounted={true}>
                             <IonDatetime showDefaultButtons={true} id="datetime" value={formData.time} onIonChange={e => handleInputChange('time', e.detail.value!)}></IonDatetime>
                         </IonModal>
