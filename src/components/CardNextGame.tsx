@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router";
 import "./CardNextGame.css";
 import {
 	IonCard,
@@ -44,10 +45,18 @@ type CardNextGameProps = {
 };
 
 const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
+	const history = useHistory();
+	const handleCardClick = () => {
+		history.push(`/gamedetails/${gameInfo.id}`);
+	};
+
 	const numberOfPeople = gameInfo.gameSize - gameInfo.availableSpots;
 	const numberOfOthers = numberOfPeople - 1;
 	return (
-		<IonCard>
+		<IonCard
+			className="ion-card-click"
+			onClick={handleCardClick}
+		>
 			<IonCardContent>
 				<IonItem
 					className="tag-container no-margin"

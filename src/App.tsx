@@ -91,6 +91,7 @@ const App: React.FC = () => (
 					<Route path="/gamedetails/:id">
 						<GameDetailsPage />
 					</Route>
+
 					{/* Routing an emoty path of / to the home page */}
 					<Route
 						exact
