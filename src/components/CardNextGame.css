@@ -31,3 +31,7 @@ ion-label {
 .label-p {
 	font-size: 0.75rem !important;
 }
+
+.ion-card-click {
+	cursor: pointer;
+}

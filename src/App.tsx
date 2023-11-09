@@ -90,9 +90,12 @@ const App: React.FC = () => (
 						<ProfilePage />
 					</Route>
 					{/* Routing the path of /gamedetails to the profile page */}
-					{/* <Route path="/gamedetails/:id">
-						<GameDetailsPage gameInfo={} />
-					</Route> */}
+					<Route path="/gamedetails/:id">
+						<GameDetailsPage />
+					</Route>
+
+
+
 					{/* Routing the path of /disclaimer to the first disclaimer page in create game creation */}
 					<Route path="/disclaimer">
 						<DisclaimerPage />
@@ -101,6 +104,7 @@ const App: React.FC = () => (
 					<Route path="/disclaimerbookingpage">
 						<DisclaimerBookingPage />
 					</Route>
+
 					{/* Routing an emoty path of / to the home page */}
 					<Route
 						exact

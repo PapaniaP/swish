@@ -1,4 +1,5 @@
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {
 	IonBackButton,
 	IonButtons,
@@ -12,12 +13,40 @@ import {
 import { shareSocialOutline } from "ionicons/icons";
 import { GameInfo } from "../components/CardNextGame";
 
-type GameDetailsPageProps = {
-	gameInfo: GameInfo;
-};
+type GameDetailsPageProps = {};
 
-const GameDetailsPage: React.FC<GameDetailsPageProps> = ({ gameInfo }) => {
-	// const { gameInfo } = props; this does not make sense to me, Samo
+const GameDetailsPage: React.FC<GameDetailsPageProps> = () => {
+	const { id } = useParams<{ id: string }>();
+	const [gameDetails, setGameDetails] = useState<GameInfo | null>(null);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await fetch(
+					"https://swish-cc699-default-rtdb.europe-west1.firebasedatabase.app/games.json"
+				);
+				if (!response.ok) {
+					throw new Error("Network response was not ok");
+				}
+
+				const data = await response.json();
+				console.log("firebase", data);
+
+				const games = data.games;
+
+				const game = games.find((game: any) => game.id === parseInt(id, 10));
+				console.log("game found", game);
+
+				if (game) {
+					setGameDetails(game);
+				}
+			} catch (error) {
+				console.error("Error fetching data: ", error);
+			}
+		};
+
+		fetchData();
+	}, [id]);
 
 	return (
 		<IonPage>
@@ -41,7 +70,18 @@ const GameDetailsPage: React.FC<GameDetailsPageProps> = ({ gameInfo }) => {
 			<IonContent
 				fullscreen
 				className="ion-padding"
-			></IonContent>
+			>
+				{gameDetails ? (
+					<div>
+						<h1>Game Details</h1>
+						<p>ID: {gameDetails.id}</p>
+						<p>Game Name: {gameDetails.gameName}</p>
+						{/* Display other game details here */}
+					</div>
+				) : (
+					<div>Loading...</div>
+				)}
+			</IonContent>
 		</IonPage>
 	);
 };
