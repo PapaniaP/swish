@@ -23,6 +23,7 @@ interface GameFormState {
     gameDescription: string;
     skillLevel: string;
     gameSize: string;
+    availableSpots: number;
     time: string;
     equipment: {
         ball: boolean;
@@ -36,6 +37,7 @@ const CreatePage3: React.FC = () => {
         gameDescription: '',
         skillLevel: '',
         gameSize: '',
+        availableSpots: 10,
         time: '',
         equipment: {
             ball: false,
