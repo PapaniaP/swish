@@ -1,0 +1,21 @@
+.no-padding {
+    padding: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.subheadingAddcourtContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subheadingContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem
+}

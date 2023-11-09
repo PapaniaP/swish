@@ -51,6 +51,8 @@ import CreatePage from "./pages/CreatePage";
 import ChatsPage from "./pages/ChatsPage";
 import ProfilePage from "./pages/ProfilePage";
 import ErrorPage from "./pages/ErrorPage";
+import DisclaimerPage from "./pages/DisclaimerPage";
+import DisclaimerBookingPage from "./pages/DisclaimerBookingPage";
 import GameDetailsPage from "./pages/GameDetailsPage";
 import { GameInfo } from "../src/components/CardNextGame";
 
@@ -90,6 +92,17 @@ const App: React.FC = () => (
 					{/* Routing the path of /gamedetails to the profile page */}
 					<Route path="/gamedetails/:id">
 						<GameDetailsPage />
+					</Route>
+
+
+
+					{/* Routing the path of /disclaimer to the first disclaimer page in create game creation */}
+					<Route path="/disclaimer">
+						<DisclaimerPage />
+					</Route>
+					{/* Routing the path of /disclaimerbookingpag to the disclaimer about booking the gym */}
+					<Route path="/disclaimerbookingpage">
+						<DisclaimerBookingPage />
 					</Route>
 
 					{/* Routing an emoty path of / to the home page */}

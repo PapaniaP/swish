@@ -1,24 +1,25 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
+import { IonButton, IonContent, IonFooter, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import "./DisclaimerPage.css";
-import ExploreContainer from "../components/ExploreContainer";
+import { alertCircle } from "ionicons/icons";
 
 const DisclaimerPage: React.FC = () => {
+
     return (
         <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonTitle>CreatePage</IonTitle>
-                </IonToolbar>
-            </IonHeader>
-            <IonContent fullscreen>
-                <IonHeader collapse="condense">
-                    <IonToolbar>
-                        <IonTitle size="large">CreatePage</IonTitle>
-                    </IonToolbar>
-                </IonHeader>
-                <ExploreContainer name="Disclaimer page" />
+            <IonContent className="ion-padding ion-text-center">
+                <div className="container">
+                    <IonIcon
+                        color="secondary"
+                        size="large"
+                        className="label-icon"
+                        aria-hidden="true"
+                        icon={alertCircle}
+                    ></IonIcon>
+                    <IonTitle className="ion-text-center">Disclaimer</IonTitle>
+                    <p className="ion-text-center">All outdoor courts are public and not reserved for your game only. You may find other people there.</p>
+                </div>
             </IonContent>
-        </IonPage>
+        </IonPage >
     );
 };
 
