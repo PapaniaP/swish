@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { GameInfo } from "../components/CardSearchGame";
+import { SearchInfo } from "../components/CardSearchGame";
 
 interface GameDetailsPageProps {
-	games: GameInfo[];
+	games: SearchInfo[];
 }
 
 function GameDetailsPage({ games }: GameDetailsPageProps) {
 	const { id } = useParams<{ id: string }>();
-	const [game, setGame] = useState<GameInfo | null>(null);
+	const [game, setGame] = useState<SearchInfo | null>(null);
 
 	useEffect(() => {
 		const gameId = parseInt(id, 10);

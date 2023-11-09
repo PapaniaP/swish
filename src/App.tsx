@@ -51,6 +51,7 @@ import { GameInfo } from "../src/components/CardNextGame";
 import CreatePage2 from "./pages/CreatePage2";
 import CreatePage3 from "./pages/CreatePage3";
 import GamesList from "./components/GamesList";
+import EditPage from "./pages/EditPage";
 
 setupIonicReact();
 
@@ -92,7 +93,14 @@ const App: React.FC = () => (
 					<Route path="/games">
 						<GamesList />
 					</Route>
+					<Route path="/games/:gameId">
+						<EditPage />
+					</Route>
 
+					{/* Routing the path of /editpage to render the game in the edit page */}
+					<Route path="/editpage">
+						<EditPage />
+					</Route>
 					{/* Routing the path of /disclaimer to the first disclaimer page in create game creation */}
 					<Route path="/disclaimer">
 						<DisclaimerPage />
