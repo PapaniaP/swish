@@ -16,6 +16,7 @@ import {
 import "./SearchPage.css";
 import useApi, { SearchResult, SearchType } from "../hooks/useAPI";
 import { useEffect, useState } from "react";
+import GamesList from "../components/GamesList";
 
 const SearchPage: React.FC = () => {
 	const { searchData } = useApi();
@@ -41,7 +42,7 @@ const SearchPage: React.FC = () => {
 		<IonPage>
 			<IonHeader>
 				<IonToolbar>
-					<IonTitle>SearchPage</IonTitle>
+					<IonTitle>Search</IonTitle>
 				</IonToolbar>
 			</IonHeader>
 			<IonContent fullscreen>
