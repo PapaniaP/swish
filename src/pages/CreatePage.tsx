@@ -61,7 +61,7 @@ const CreatePage: React.FC = () => {
 					{courts.map((court) => (
 						<Court
 							key={court.id}
-							CourtInfo={court}
+							courtInfo={court}
 						/>
 					))}
 

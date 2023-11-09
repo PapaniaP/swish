@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./CardNextGame.css";
 import "./Court.css";
-import GameFetcher from "./GameFetcher";
+import CourtFetcher from "./CourtFetcher";
 
 import {
 	IonCard,
@@ -21,32 +21,19 @@ import {
 	timeOutline,
 } from "ionicons/icons";
 
-export type GameInfo = {
+export type CourtInfo = {
 	id: number;
-	gameName: string;
-	skillLevel: string;
-	gameDescription: string;
-	court: {
-		courtImage: string;
-		location: string;
-		gameType: "Indoor" | "Outdoor";
-	};
-	gameSize: number;
-	availableSpots: number;
-	time: string;
-	organiser: {
-		image: string;
-		name: string;
-	};
+	courtName: string;
+	courtImage: string;
+	location: string;
+	courtType: "Indoor" | "Outdoor";
 };
 
-type CardNextGameProps = {
-	gameInfo: GameInfo;
+type CourtProps = {
+	courtInfo: CourtInfo;
 };
 
-const Court: React.FC<CardNextGameProps> = ({ gameInfo }) => {
-	const numberOfPeople = gameInfo.gameSize - gameInfo.availableSpots;
-	const numberOfOthers = numberOfPeople - 1;
+const Court: React.FC<CourtProps> = ({ courtInfo }) => {
 	return (
 		<IonCard>
 			<IonCardContent>
@@ -59,43 +46,12 @@ const Court: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 						color="secondary"
 						outline={true}
 					>
-						{gameInfo.court.gameType}
-					</IonChip>
-					<IonChip
-						className="custom-chip"
-						color="secondary"
-						outline={true}
-					>
-						{gameInfo.skillLevel}
-					</IonChip>
-
-					<IonChip
-						className="custom-chip"
-						color="secondary"
-						outline={true}
-						slot="end"
-					>
-						<IonIcon
-							className="custom-icon"
-							aria-hidden="true"
-							icon={peopleOutline}
-						/>
-						{`${numberOfPeople} / ${gameInfo.gameSize}`}
+						{courtInfo.courtType}
 					</IonChip>
 				</IonItem>
 
 				<IonItem lines="full">
-					<IonCardTitle>{gameInfo.gameName}</IonCardTitle>
-				</IonItem>
-
-				<IonItem lines="none">
-					<IonIcon
-						className="label-icon"
-						aria-hidden="true"
-						icon={timeOutline}
-						slot="start"
-					></IonIcon>
-					<IonLabel className="time-label">{gameInfo.time}</IonLabel>
+					<IonCardTitle>{courtInfo.courtName}</IonCardTitle>
 				</IonItem>
 				<IonItem lines="full">
 					<IonIcon
@@ -104,29 +60,7 @@ const Court: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 						icon={pinOutline}
 						slot="start"
 					></IonIcon>
-					<IonLabel>{gameInfo.court.location}</IonLabel>
-				</IonItem>
-				<IonItem lines="full">
-					<IonAvatar slot="start">
-						<IonImg src={gameInfo.organiser.image} />
-					</IonAvatar>
-					<IonLabel>
-						<p className="label-p">
-							<strong>Game Organizer</strong>
-						</p>
-						<p className="label-p">@{gameInfo.organiser.name}</p>
-					</IonLabel>
-				</IonItem>
-				<IonItem lines="none">
-					<IonIcon
-						className="label-icon"
-						aria-hidden="true"
-						color="success"
-						icon={checkmarkDoneCircle}
-						slot="start"
-					></IonIcon>
-					{/*Placeholder for confirmation function  */}
-					<IonLabel color="success">Double confirmation</IonLabel>{" "}
+					<IonLabel>{courtInfo.location}</IonLabel>
 				</IonItem>
 			</IonCardContent>
 		</IonCard>
