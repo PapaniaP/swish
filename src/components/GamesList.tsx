@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	IonContent,
 	IonHeader,
@@ -9,15 +9,35 @@ import {
 	IonToolbar,
 } from "@ionic/react";
 import CardSearchGame from "./CardSearchGame";
+import { SearchInfo } from "./CardSearchGame";
 import GameFetcher from "./GameFetcher";
-import { GameInfo } from "./CardSearchGame";
 
 const GamesList: React.FC = () => {
-	const [games, setGames] = useState<GameInfo[]>([]);
+	const [games, setGames] = useState<SearchInfo[]>([]);
 
-	const handleGameDataFetched = (data: GameInfo[]) => {
-		setGames(data);
-	};
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const url = `https://swish-cc699-default-rtdb.europe-west1.firebasedatabase.app/games.json`;
+				const response = await fetch(url);
+
+				if (!response.ok) {
+					throw new Error("Network response was not ok");
+				}
+
+				const data = await response.json();
+				const loadedGames = Object.keys(data).map((key) => ({
+					id: key,
+					...data[key],
+				}));
+				setGames(loadedGames);
+			} catch (error) {
+				console.error("Error fetching data: ", error);
+			}
+		};
+
+		fetchData();
+	}, []);
 
 	return (
 		<IonPage>
@@ -27,11 +47,10 @@ const GamesList: React.FC = () => {
 				</IonToolbar>
 			</IonHeader>
 			<IonContent fullscreen>
-				<GameFetcher onDataFetched={handleGameDataFetched} />
 				{games.map((game) => (
 					<CardSearchGame
 						key={game.id}
-						gameInfo={game}
+						searchInfo={game}
 					/>
 				))}
 			</IonContent>

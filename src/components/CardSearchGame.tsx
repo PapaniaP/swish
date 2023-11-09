@@ -12,12 +12,16 @@ import {
 } from "@ionic/react";
 import { peopleOutline, pinOutline, timeOutline } from "ionicons/icons";
 
-export type GameInfo = {
+export type SearchInfo = {
 	id: string;
 	gameName: string;
 	skillLevel: string;
 	gameDescription: string;
-	court: { courtImage: string; location: string; gameType: "Indoor" | "Outdoor" };
+	court: {
+		courtImage: string;
+		location: string;
+		gameType: "Indoor" | "Outdoor";
+	};
 	gameSize: number;
 	availableSpots: number;
 	time: string;
@@ -28,22 +32,17 @@ export type GameInfo = {
 };
 
 type CardSearchGameProps = {
-	gameInfo: GameInfo;
+	searchInfo: SearchInfo;
 };
 
-const CardSearchGame: React.FC<CardSearchGameProps> = ({ gameInfo }) => {
+const CardSearchGame: React.FC<CardSearchGameProps> = ({ searchInfo }) => {
 	const history = useHistory();
 
-	const handleCardClick = (id: string) => {
-		history.push(`/gamedetails/${gameInfo.id}`);
-	};
-
-	const numberOfPeople = gameInfo.gameSize - gameInfo.availableSpots;
+	const numberOfPeople = searchInfo.gameSize - searchInfo.availableSpots;
 	return (
 		<IonCard
 			className="ion-card-click"
-			key={gameInfo.id}
-			onClick={() => handleCardClick(gameInfo.id)}
+			key={searchInfo.id}
 		>
 			<IonCardContent>
 				<IonItem
@@ -55,14 +54,14 @@ const CardSearchGame: React.FC<CardSearchGameProps> = ({ gameInfo }) => {
 						color="secondary"
 						outline={true}
 					>
-						{gameInfo.court.gameType}
+						{searchInfo.court && searchInfo.court.gameType}
 					</IonChip>
 					<IonChip
 						className="custom-chip"
 						color="secondary"
 						outline={true}
 					>
-						{gameInfo.skillLevel}
+						{searchInfo.skillLevel}
 					</IonChip>
 
 					<IonChip
@@ -76,12 +75,12 @@ const CardSearchGame: React.FC<CardSearchGameProps> = ({ gameInfo }) => {
 							aria-hidden="true"
 							icon={peopleOutline}
 						/>
-						{`${numberOfPeople} / ${gameInfo.gameSize}`}
+						{`${numberOfPeople} / ${searchInfo.gameSize}`}
 					</IonChip>
 				</IonItem>
 
 				<IonItem lines="full">
-					<IonCardTitle>{gameInfo.gameName}</IonCardTitle>
+					<IonCardTitle>{searchInfo.gameName}</IonCardTitle>
 				</IonItem>
 
 				<IonItem lines="none">
@@ -91,7 +90,7 @@ const CardSearchGame: React.FC<CardSearchGameProps> = ({ gameInfo }) => {
 						icon={timeOutline}
 						slot="start"
 					></IonIcon>
-					<IonLabel className="time-label">{gameInfo.time}</IonLabel>
+					<IonLabel className="time-label">{searchInfo.time}</IonLabel>
 				</IonItem>
 				<IonItem lines="full">
 					<IonIcon
@@ -100,7 +99,7 @@ const CardSearchGame: React.FC<CardSearchGameProps> = ({ gameInfo }) => {
 						icon={pinOutline}
 						slot="start"
 					></IonIcon>
-					<IonLabel>{gameInfo.court.location}</IonLabel>
+					<IonLabel>{searchInfo.court && searchInfo.court.gameType}</IonLabel>
 				</IonItem>
 			</IonCardContent>
 		</IonCard>

@@ -28,7 +28,7 @@ const GameFetcher: React.FC<GameFetcherProps> = ({ onDataFetched }) => {
 		};
 
 		fetchData();
-	}, []);
+	}, [onDataFetched]);
 
 	return null;
 };
