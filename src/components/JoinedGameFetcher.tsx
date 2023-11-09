@@ -28,7 +28,7 @@ const JoinedGameFetcher: React.FC<JoinedGameFetcherProps> = ({ onDataFetched }) 
 		};
 
 		fetchData();
-	}, [onDataFetched]);
+	}, []);
 
 	return null;
 };

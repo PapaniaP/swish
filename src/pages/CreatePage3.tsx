@@ -13,16 +13,27 @@ import {
     IonItem,
     IonLabel
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./CreatePage2.css";
 import "../styles.css";
 import "../theme/variables.css";
+
+// Define a Court interface if you have specific properties for a court
+interface Court {
+    id: string;
+    courtImage: string;
+    gameType: string;
+    location: string;
+    courtName: string;
+    // ... other properties of a court
+}
 
 interface GameFormState {
     gameName: string;
     gameDescription: string;
     skillLevel: string;
     gameSize: string;
+    court: Court | null; // Use the Court interface here
     availableSpots: number;
     time: string;
     equipment: {
@@ -37,6 +48,7 @@ const CreatePage3: React.FC = () => {
         gameDescription: '',
         skillLevel: '',
         gameSize: '',
+        court: null,
         availableSpots: 10,
         time: '',
         equipment: {
@@ -55,6 +67,33 @@ const CreatePage3: React.FC = () => {
             equipment: { ...formData.equipment, [name]: !formData.equipment[name] }
         });
     };
+
+    // Below this is fetching data for displaying courts in dropdown
+    const [courts, setCourts] = useState<Court[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const url = `https://swish-cc699-default-rtdb.europe-west1.firebasedatabase.app/Courts.json`;
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+
+                const data = await response.json();
+                const loadedCourts = Object.keys(data).map((key) => ({
+                    id: key,
+                    ...data[key],
+                }));
+                setCourts(loadedCourts);
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const handleSaveAndCreate = async () => {
         try {
@@ -98,7 +137,21 @@ const CreatePage3: React.FC = () => {
                     <IonSelect value={formData.skillLevel} onIonChange={e => handleInputChange('skillLevel', e.detail.value)}>
                         <IonSelectOption value="Beginner">Beginner</IonSelectOption>
                         <IonSelectOption value="Casual">Casual</IonSelectOption>
-                        <IonSelectOption value="Professional">Professional</IonSelectOption>
+                        <IonSelectOption value="Skilled">Skilled</IonSelectOption>
+                        <IonSelectOption value="Experienced">Experienced</IonSelectOption>
+                    </IonSelect>
+                </IonItem>
+                <IonItem>
+                    <IonLabel position="stacked">Court</IonLabel>
+                    <IonSelect
+                        value={formData.court?.id} // Assuming the court object has an id
+                        onIonChange={e => handleInputChange('court', courts.find(court => court.id === e.detail.value))}
+                    >
+                        {courts.map((court) => (
+                            <IonSelectOption key={court.id} value={court.id}>
+                                {court.courtName} {/* Assuming the court object has a name */}
+                            </IonSelectOption>
+                        ))}
                     </IonSelect>
                 </IonItem>
                 <IonItem>

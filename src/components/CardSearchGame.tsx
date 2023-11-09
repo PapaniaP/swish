@@ -25,10 +25,6 @@ export type SearchInfo = {
 	gameSize: number;
 	availableSpots: number;
 	time: string;
-	organiser: {
-		image: string;
-		name: string;
-	};
 };
 
 type CardSearchGameProps = {
