@@ -228,7 +228,10 @@ const CreatePage3: React.FC = () => {
 				<div className="timeAndEquipment">
 					<div className="timepickerContainer">
 						<strong className="timepickerStrong">Select a date and time</strong>
-						<IonDatetimeButton datetime="datetime"></IonDatetimeButton>
+						<IonDatetimeButton
+							datetime="datetime"
+							className="dateButtons"
+						></IonDatetimeButton>
 						<IonModal keepContentsMounted={true}>
 							<IonDatetime
 								showDefaultButtons={true}
