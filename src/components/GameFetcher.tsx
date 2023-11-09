@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { GameInfo } from "../components/CardNextGame";
+import React, { useEffect } from "react";
+import { GameInfo } from "./CardNextGame";
 
 interface GameFetcherProps {
 	onDataFetched: (games: GameInfo[]) => void;
@@ -28,7 +28,7 @@ const GameFetcher: React.FC<GameFetcherProps> = ({ onDataFetched }) => {
 		};
 
 		fetchData();
-	}, [onDataFetched]);
+	}, []);
 
 	return null;
 };

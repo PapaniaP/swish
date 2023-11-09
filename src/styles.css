@@ -28,3 +28,7 @@ ion-card-title {
 	font-family: "Teko";
 	font-size: 1.75rem;
 }
+
+ion-card {
+	border: 2px solid var(--grey-dark);
+}

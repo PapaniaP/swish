@@ -8,9 +8,9 @@ import {
 	IonTitle,
 	IonToolbar,
 } from "@ionic/react";
-import CardNextGame from "./CardNextGame";
+import CardSearchGame from "./CardSearchGame";
 import GameFetcher from "./GameFetcher";
-import { GameInfo } from "./CardNextGame";
+import { GameInfo } from "./CardSearchGame";
 
 const GamesList: React.FC = () => {
 	const [games, setGames] = useState<GameInfo[]>([]);
@@ -28,16 +28,12 @@ const GamesList: React.FC = () => {
 			</IonHeader>
 			<IonContent fullscreen>
 				<GameFetcher onDataFetched={handleGameDataFetched} />
-				<IonList>
-					{games.map((game) => (
-						<IonItem key={game.id}>
-							<CardNextGame
-								key={game.id}
-								gameInfo={game}
-							/>
-						</IonItem>
-					))}
-				</IonList>
+				{games.map((game) => (
+					<CardSearchGame
+						key={game.id}
+						gameInfo={game}
+					/>
+				))}
 			</IonContent>
 		</IonPage>
 	);

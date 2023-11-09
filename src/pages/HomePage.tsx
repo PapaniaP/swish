@@ -1,9 +1,19 @@
 import React, { useState } from "react";
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
+import {
+	IonButton,
+	IonContent,
+	IonHeader,
+	IonPage,
+	IonText,
+	IonTitle,
+	IonToolbar,
+} from "@ionic/react";
 import CardNextGame from "../components/CardNextGame";
+import CardYourGames from "../components/CardYourGames";
 import EmptyStateHome from "../components/EmptyStateHome";
-import GameFetcher from "../components/GameFetcher";
+import JoinedGameFetcher from "../components/JoinedGameFetcher";
 import { GameInfo } from "../components/CardNextGame";
+import "./HomePage.css";
 
 const HomePage: React.FC = () => {
 	const [games, setGames] = useState<GameInfo[]>([]);
@@ -28,12 +38,51 @@ const HomePage: React.FC = () => {
 				</IonToolbar>
 			</IonHeader>
 			<IonContent fullscreen>
-				<GameFetcher onDataFetched={handleGameDataFetched} />
-				{nextGame ? (
-					<CardNextGame gameInfo={nextGame} />
-				) : (
-					<EmptyStateHome /> // Handle empty state
-				)}
+				<section className="next-game">
+					<div className="sub-container">
+						<h2 className="sub-heading">Your Next Game</h2>
+					</div>
+					<JoinedGameFetcher onDataFetched={handleGameDataFetched} />
+					{nextGame ? (
+						<CardNextGame gameInfo={nextGame} />
+					) : (
+						<EmptyStateHome /> // Handle empty state
+					)}
+				</section>
+				<section className="your-games">
+					<div className="sub-container">
+						<h2 className="sub-heading">Your Games</h2>
+					</div>
+					<JoinedGameFetcher onDataFetched={handleGameDataFetched} />
+					{nextGame ? (
+						sortedGames.length > 1 ? (
+							sortedGames.slice(1).map((game) => (
+								<CardYourGames
+									key={game.id}
+									gameInfo={game}
+								/>
+							))
+						) : (
+							<>
+								<div className="no-games">
+									<IonTitle className="ion-text-center">Disclaimer</IonTitle>
+									<p className="ion-text-center">
+										No additional games to display. Go to the{" "}
+										<IonText color="primary">'Search'</IonText> section to find more
+										games.
+									</p>
+									<IonButton
+										className="ion-padding"
+										slot="end"
+										routerLink="/search"
+									>
+										Find a game
+									</IonButton>
+								</div>
+							</>
+						)
+					) : null}
+				</section>
 			</IonContent>
 		</IonPage>
 	);

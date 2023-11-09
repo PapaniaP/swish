@@ -1,11 +1,9 @@
 import React from "react";
-import "./CardNextGame.css";
-import "./Court.css";
+import { useHistory } from "react-router";
+import "./CardYourGames.css";
 import {
 	IonCard,
 	IonCardContent,
-	IonCardHeader,
-	IonCardSubtitle,
 	IonCardTitle,
 	IonItem,
 	IonLabel,
@@ -40,15 +38,23 @@ export type GameInfo = {
 	};
 };
 
-type CardNextGameProps = {
+type CardYourGamesProps = {
 	gameInfo: GameInfo;
 };
 
-const Court: React.FC<CardNextGameProps> = ({ gameInfo }) => {
+const CardYourGames: React.FC<CardYourGamesProps> = ({ gameInfo }) => {
+	const history = useHistory();
+	const handleCardClick = () => {
+		history.push(`/gamedetails/${gameInfo.id}`);
+	};
+
 	const numberOfPeople = gameInfo.gameSize - gameInfo.availableSpots;
-	const numberOfOthers = numberOfPeople - 1;
+	// const numberOfOthers = numberOfPeople - 1;
 	return (
-		<IonCard>
+		<IonCard
+			className="ion-card-click"
+			onClick={handleCardClick}
+		>
 			<IonCardContent>
 				<IonItem
 					className="tag-container no-margin"
@@ -106,17 +112,7 @@ const Court: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 					></IonIcon>
 					<IonLabel>{gameInfo.court.location}</IonLabel>
 				</IonItem>
-				<IonItem lines="full">
-					<IonAvatar slot="start">
-						<IonImg src={gameInfo.organiser.image} />
-					</IonAvatar>
-					<IonLabel>
-						<p className="label-p">
-							<strong>Game Organizer</strong>
-						</p>
-						<p className="label-p">@{gameInfo.organiser.name}</p>
-					</IonLabel>
-				</IonItem>
+
 				<IonItem lines="none">
 					<IonIcon
 						className="label-icon"
@@ -125,12 +121,11 @@ const Court: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 						icon={checkmarkDoneCircle}
 						slot="start"
 					></IonIcon>
-					{/*Placeholder for confirmation function  */}
-					<IonLabel color="success">Double confirmation</IonLabel>{" "}
+					<IonLabel color="success">Double confirmation</IonLabel>
 				</IonItem>
 			</IonCardContent>
 		</IonCard>
 	);
 };
 
-export default Court;
+export default CardYourGames;

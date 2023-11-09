@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { GameInfo } from "../components/CardNextGame";
+import { GameInfo } from "./CardYourGames";
 
-interface GameFetcherProps {
+interface JoinedGameFetcherProps {
 	onDataFetched: (games: GameInfo[]) => void;
 }
 
-const GameFetcher: React.FC<GameFetcherProps> = ({ onDataFetched }) => {
+const JoinedGameFetcher: React.FC<JoinedGameFetcherProps> = ({ onDataFetched }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -33,4 +33,4 @@ const GameFetcher: React.FC<GameFetcherProps> = ({ onDataFetched }) => {
 	return null;
 };
 
-export default GameFetcher;
+export default JoinedGameFetcher;

@@ -4,8 +4,6 @@ import "./CardNextGame.css";
 import {
 	IonCard,
 	IonCardContent,
-	IonCardHeader,
-	IonCardSubtitle,
 	IonCardTitle,
 	IonItem,
 	IonLabel,
@@ -22,7 +20,7 @@ import {
 } from "ionicons/icons";
 
 export type GameInfo = {
-	id: number;
+	id: string;
 	gameName: string;
 	skillLevel: string;
 	gameDescription: string;
@@ -51,7 +49,7 @@ const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 	};
 
 	const numberOfPeople = gameInfo.gameSize - gameInfo.availableSpots;
-	const numberOfOthers = numberOfPeople - 1;
+	// const numberOfOthers = numberOfPeople - 1;
 	return (
 		<IonCard
 			className="ion-card-click"
@@ -133,8 +131,7 @@ const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 						icon={checkmarkDoneCircle}
 						slot="start"
 					></IonIcon>
-					{/*Placeholder for confirmation function  */}
-					<IonLabel color="success">Double confirmation</IonLabel>{" "}
+					<IonLabel color="success">Double confirmation</IonLabel>
 				</IonItem>
 			</IonCardContent>
 		</IonCard>
