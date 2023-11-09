@@ -1,34 +1,23 @@
 import React from "react";
 import { useHistory } from "react-router";
-import "./CardNextGame.css";
+import "./CardSearchGame.css";
 import {
 	IonCard,
 	IonCardContent,
 	IonCardTitle,
 	IonItem,
 	IonLabel,
-	IonAvatar,
-	IonImg,
 	IonChip,
 	IonIcon,
 } from "@ionic/react";
-import {
-	checkmarkDoneCircle,
-	peopleOutline,
-	pinOutline,
-	timeOutline,
-} from "ionicons/icons";
+import { peopleOutline, pinOutline, timeOutline } from "ionicons/icons";
 
 export type GameInfo = {
 	id: string;
 	gameName: string;
 	skillLevel: string;
 	gameDescription: string;
-	court: {
-		courtImage: string;
-		location: string;
-		gameType: "Indoor" | "Outdoor";
-	};
+	court: { courtImage: string; location: string; gameType: "Indoor" | "Outdoor" };
 	gameSize: number;
 	availableSpots: number;
 	time: string;
@@ -38,22 +27,23 @@ export type GameInfo = {
 	};
 };
 
-type CardNextGameProps = {
+type CardSearchGameProps = {
 	gameInfo: GameInfo;
 };
 
-const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
+const CardSearchGame: React.FC<CardSearchGameProps> = ({ gameInfo }) => {
 	const history = useHistory();
-	const handleCardClick = () => {
+
+	const handleCardClick = (id: string) => {
 		history.push(`/gamedetails/${gameInfo.id}`);
 	};
 
 	const numberOfPeople = gameInfo.gameSize - gameInfo.availableSpots;
-	// const numberOfOthers = numberOfPeople - 1;
 	return (
 		<IonCard
 			className="ion-card-click"
-			onClick={handleCardClick}
+			key={gameInfo.id}
+			onClick={() => handleCardClick(gameInfo.id)}
 		>
 			<IonCardContent>
 				<IonItem
@@ -112,30 +102,9 @@ const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 					></IonIcon>
 					<IonLabel>{gameInfo.court.location}</IonLabel>
 				</IonItem>
-				<IonItem lines="full">
-					<IonAvatar slot="start">
-						<IonImg src={gameInfo.organiser.image} />
-					</IonAvatar>
-					<IonLabel>
-						<p className="label-p">
-							<strong>Game Organizer</strong>
-						</p>
-						<p className="label-p">@{gameInfo.organiser.name}</p>
-					</IonLabel>
-				</IonItem>
-				<IonItem lines="none">
-					<IonIcon
-						className="label-icon"
-						aria-hidden="true"
-						color="success"
-						icon={checkmarkDoneCircle}
-						slot="start"
-					></IonIcon>
-					<IonLabel color="success">Double confirmation</IonLabel>
-				</IonItem>
 			</IonCardContent>
 		</IonCard>
 	);
 };
 
-export default CardNextGame;
+export default CardSearchGame;

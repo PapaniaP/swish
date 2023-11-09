@@ -12,16 +12,10 @@ import {
 import { IonReactRouter } from "@ionic/react-router";
 import {
 	addCircleOutline,
-	chatbubble,
 	chatbubbleOutline,
-	ellipse,
-	home,
 	homeOutline,
-	person,
 	personOutline,
 	searchOutline,
-	square,
-	triangle,
 } from "ionicons/icons";
 
 /* Core CSS required for Ionic components to work properly */
@@ -50,7 +44,6 @@ import SearchPage from "./pages/SearchPage";
 import CreatePage from "./pages/CreatePage";
 import ChatsPage from "./pages/ChatsPage";
 import ProfilePage from "./pages/ProfilePage";
-import ErrorPage from "./pages/ErrorPage";
 import DisclaimerPage from "./pages/DisclaimerPage";
 import DisclaimerBookingPage from "./pages/DisclaimerBookingPage";
 import GameDetailsPage from "./pages/GameDetailsPage";
@@ -93,10 +86,8 @@ const App: React.FC = () => (
 					</Route>
 					{/* Routing the path of /gamedetails to the profile page */}
 					<Route path="/gamedetails/:id">
-						<GameDetailsPage />
+						<GameDetailsPage games={ } />
 					</Route>
-
-
 
 					{/* Routing the path of /disclaimer to the first disclaimer page in create game creation */}
 					<Route path="/disclaimer">

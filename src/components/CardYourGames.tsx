@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router";
-import "./CardNextGame.css";
+import "./CardYourGames.css";
 import {
 	IonCard,
 	IonCardContent,
@@ -38,11 +38,11 @@ export type GameInfo = {
 	};
 };
 
-type CardNextGameProps = {
+type CardYourGamesProps = {
 	gameInfo: GameInfo;
 };
 
-const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
+const CardYourGames: React.FC<CardYourGamesProps> = ({ gameInfo }) => {
 	const history = useHistory();
 	const handleCardClick = () => {
 		history.push(`/gamedetails/${gameInfo.id}`);
@@ -112,17 +112,7 @@ const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 					></IonIcon>
 					<IonLabel>{gameInfo.court.location}</IonLabel>
 				</IonItem>
-				<IonItem lines="full">
-					<IonAvatar slot="start">
-						<IonImg src={gameInfo.organiser.image} />
-					</IonAvatar>
-					<IonLabel>
-						<p className="label-p">
-							<strong>Game Organizer</strong>
-						</p>
-						<p className="label-p">@{gameInfo.organiser.name}</p>
-					</IonLabel>
-				</IonItem>
+
 				<IonItem lines="none">
 					<IonIcon
 						className="label-icon"
@@ -138,4 +128,4 @@ const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 	);
 };
 
-export default CardNextGame;
+export default CardYourGames;

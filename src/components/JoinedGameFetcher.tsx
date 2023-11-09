@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import { GameInfo } from "./CardNextGame";
+import React, { useState, useEffect } from "react";
+import { GameInfo } from "./CardYourGames";
 
-interface GameFetcherProps {
+interface JoinedGameFetcherProps {
 	onDataFetched: (games: GameInfo[]) => void;
 }
 
-const GameFetcher: React.FC<GameFetcherProps> = ({ onDataFetched }) => {
+const JoinedGameFetcher: React.FC<JoinedGameFetcherProps> = ({ onDataFetched }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const url = `https://swish-cc699-default-rtdb.europe-west1.firebasedatabase.app/games.json`;
+				const url = `https://swish-cc699-default-rtdb.europe-west1.firebasedatabase.app/joinedGames.json`;
 				const response = await fetch(url);
 
 				if (!response.ok) {
@@ -28,9 +28,9 @@ const GameFetcher: React.FC<GameFetcherProps> = ({ onDataFetched }) => {
 		};
 
 		fetchData();
-	}, []);
+	}, [onDataFetched]);
 
 	return null;
 };
 
-export default GameFetcher;
+export default JoinedGameFetcher;

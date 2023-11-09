@@ -1,89 +1,37 @@
-import { useParams, useHistory } from "react-router-dom";
-import { useState, useEffect } from "react";
-import {
-	IonBackButton,
-	IonButtons,
-	IonContent,
-	IonHeader,
-	IonIcon,
-	IonPage,
-	IonTitle,
-	IonToolbar,
-} from "@ionic/react";
-import { shareSocialOutline } from "ionicons/icons";
-import { GameInfo } from "../components/CardNextGame";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { GameInfo } from "../components/CardSearchGame";
 
-type GameDetailsPageProps = {};
+interface GameDetailsPageProps {
+	games: GameInfo[];
+}
 
-const GameDetailsPage: React.FC<GameDetailsPageProps> = () => {
+function GameDetailsPage({ games }: GameDetailsPageProps) {
 	const { id } = useParams<{ id: string }>();
-	const [gameDetails, setGameDetails] = useState<GameInfo | null>(null);
+	const [game, setGame] = useState<GameInfo | null>(null);
 
 	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await fetch(
-					"https://swish-cc699-default-rtdb.europe-west1.firebasedatabase.app/games.json"
-				);
-				if (!response.ok) {
-					throw new Error("Network response was not ok");
-				}
+		const gameId = parseInt(id, 10);
 
-				const data = await response.json();
-				console.log("firebase", data);
-
-				const games = data.games;
-
-				const game = games.find((game: any) => game.id === parseInt(id, 10));
-				console.log("game found", game);
-
-				if (game) {
-					setGameDetails(game);
-				}
-			} catch (error) {
-				console.error("Error fetching data: ", error);
-			}
-		};
-
-		fetchData();
-	}, [id]);
+		// Use a different variable name for the map function to avoid conflicts
+		const fetchedGame = games.find((g) => g.id === gameId.toString());
+		setGame(fetchedGame || null);
+	}, [games, id]);
 
 	return (
-		<IonPage>
-			<IonHeader>
-				<IonToolbar>
-					<IonButtons slot="start">
-						<IonBackButton defaultHref="#"></IonBackButton>
-					</IonButtons>
-					<IonTitle className="ion-text-center">Game Details</IonTitle>
-					<IonButtons slot="end">
-						<IonIcon
-							className="label-icon"
-							aria-hidden="true"
-							icon={shareSocialOutline}
-							slot="start"
-						></IonIcon>
-					</IonButtons>
-				</IonToolbar>
-			</IonHeader>
-
-			<IonContent
-				fullscreen
-				className="ion-padding"
-			>
-				{gameDetails ? (
-					<div>
-						<h1>Game Details</h1>
-						<p>ID: {gameDetails.id}</p>
-						<p>Game Name: {gameDetails.gameName}</p>
-						{/* Display other game details here */}
-					</div>
-				) : (
-					<div>Loading...</div>
-				)}
-			</IonContent>
-		</IonPage>
+		<div>
+			<h1>Game Details</h1>
+			{game ? (
+				<div>
+					<h2>{game.gameName}</h2>
+					<p>{game.skillLevel}</p>
+					{/* Render other game details */}
+				</div>
+			) : (
+				<p>Game not found</p>
+			)}
+		</div>
 	);
-};
+}
 
 export default GameDetailsPage;
