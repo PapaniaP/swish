@@ -1,6 +1,7 @@
 import { IonButton, IonContent, IonFooter, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import "./DisclaimerPage.css";
 import { checkmarkCircle } from "ionicons/icons";
+// Samuel - This is just simple display of ionic components adjsuted by styling
 
 const DisclaimerBookingPage: React.FC = () => {
 
