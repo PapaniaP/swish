@@ -30,6 +30,7 @@ export type SearchInfo = {
 	availableSpots: number;
 	time: string;
 };
+// Samuel, Jarl, Paolo - Paolo created a function which allowed us to list all the items. Samuel put it inside the page and adjusted the code so it works. Jarl started the search and filtering and Samuel finished the functionality.
 
 const SearchPage: React.FC = () => {
 	const [searchTerm, setSearchTerm] = useState("");
@@ -38,6 +39,7 @@ const SearchPage: React.FC = () => {
 	const [filteredGames, setFilteredGames] = useState<SearchInfo[]>([]);
 
 	useEffect(() => {
+		// function to list fetch games object from firebase
 		const fetchData = async () => {
 			try {
 				const url = `https://swish-cc699-default-rtdb.europe-west1.firebasedatabase.app/games.json`;
@@ -60,6 +62,8 @@ const SearchPage: React.FC = () => {
 
 		fetchData();
 	}, []);
+
+	// implementing filtering option with the help of chatGPT
 
 	useEffect(() => {
 		const filtered = games.filter((game) => {
@@ -99,7 +103,7 @@ const SearchPage: React.FC = () => {
 						<IonSelectOption value="Outdoor">Outdoor</IonSelectOption>
 					</IonSelect>
 				</IonItem>
-
+				{/* mapping through the the filtered games and displaying each game from database */}
 				<IonList>
 					{filteredGames.map((game) => (
 						<CardSearchGame key={game.id} searchInfo={game} />

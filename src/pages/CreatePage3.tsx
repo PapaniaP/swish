@@ -1,3 +1,5 @@
+// Samuel - creating an object with a game and sending it to the database succesful, the objects get listed in the search page afterwards.
+
 import {
 	IonButton,
 	IonContent,
@@ -60,6 +62,8 @@ const CreatePage3: React.FC = () => {
 		},
 	});
 
+	// handling the value with functions which can be then send to database
+
 	const handleInputChange = (name: keyof GameFormState, value: any) => {
 		setFormData({ ...formData, [name]: value });
 	};
@@ -97,6 +101,8 @@ const CreatePage3: React.FC = () => {
 
 		fetchData();
 	}, []);
+
+	// sending data to the database using arrow function
 
 	const handleSaveAndCreate = async () => {
 		try {
@@ -185,6 +191,8 @@ const CreatePage3: React.FC = () => {
 					</IonSelect>
 				</IonItem>
 				<IonItem>
+
+					{/* fetching data from database to display courts in a dropdown which user can select afterwards */}
 					<IonLabel position="stacked">Court</IonLabel>
 					<IonSelect
 						justify="space-between"
@@ -198,6 +206,7 @@ const CreatePage3: React.FC = () => {
 							)
 						}
 					>
+						{/* user can select the court here */}
 						{courts.map((court) => (
 							<IonSelectOption
 								key={court.id}

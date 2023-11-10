@@ -1,3 +1,5 @@
+// Samuel - this was a failed attempt to create a create page
+
 import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonTextarea, IonSelect, IonSelectOption, IonDatetime, IonDatetimeButton, IonModal, IonCheckbox } from "@ionic/react";
 import "./CreatePage2.css";
 import "../styles.css"

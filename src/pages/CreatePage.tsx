@@ -1,3 +1,5 @@
+// Samuel - Listing items from the database were successful. However, we did not think up a way to save the value where user selects the court in the first step of the process. That is why we created create page 3 where all the inputs are on the same page.
+
 import {
 	IonButton,
 	IonContent,

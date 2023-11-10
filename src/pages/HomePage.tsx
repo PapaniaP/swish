@@ -1,3 +1,5 @@
+// Paolo - This is a home page for our app which is featuring Your next game. This type of card is different to the rest because it is hardcoded.
+
 import React, { useState } from "react";
 import {
 	IonButton,
@@ -21,6 +23,8 @@ const HomePage: React.FC = () => {
 	const handleGameDataFetched = (data: GameInfo[]) => {
 		setGames(data);
 	};
+
+	// this sorts games to display the closest to the deadline
 
 	const sortedGames = [...games].sort((a, b) => {
 		const dateA = new Date(a.time);
@@ -54,6 +58,7 @@ const HomePage: React.FC = () => {
 						<h2 className="sub-heading">Your Games</h2>
 					</div>
 					<JoinedGameFetcher onDataFetched={handleGameDataFetched} />
+					{/* displaying next game by mapping through CardYourGames component */}
 					{nextGame ? (
 						sortedGames.length > 1 ? (
 							sortedGames.slice(1).map((game) => (

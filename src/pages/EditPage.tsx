@@ -1,3 +1,5 @@
+//  Paolo, Samuel - Paolo managed to create the connection in link with a specific game and Samuel managed to display the edit page but failed to update the right object with information - to be done in the upcoming week
+
 import React, { useState, useEffect } from "react";
 import {
 	IonButton,
