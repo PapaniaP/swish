@@ -20,7 +20,7 @@ const DisclaimerBookingPage: React.FC = () => {
                         Bookings and payments are handled outside of our platform.</p>
                 </div>
             </IonContent>
-            <IonButton expand="block" className="ion-padding" slot="end" routerLink="/create">
+            <IonButton expand="block" className="ion-padding" slot="end" routerLink="/create3">
                 Next
             </IonButton>
         </IonPage >

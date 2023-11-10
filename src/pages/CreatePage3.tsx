@@ -228,10 +228,14 @@ const CreatePage3: React.FC = () => {
 				<div className="timeAndEquipment">
 					<div className="timepickerContainer">
 						<strong className='timepickerStrong'>Select a date and time</strong>
-						<IonDatetimeButton datetime="datetime" className="dateButtons"></IonDatetimeButton>
+						<IonDatetime value={formData.time} onIonChange={e => handleInputChange('time', e.detail.value!)}></IonDatetime>
+
+						{/* this date picker is not showing up. It seems that it is because of the value in IonDateTime */}
+
+						{/* <IonDatetimeButton datetime="datetime" className="dateButtons"></IonDatetimeButton>
 						<IonModal keepContentsMounted={true}>
 							<IonDatetime value={formData.time} id="datetime" showDefaultButtons={true} onIonChange={e => handleInputChange('time', e.detail.value!)}></IonDatetime>
-						</IonModal>
+						</IonModal> */}
 					</div>
 					<div>
 						<div className="text">

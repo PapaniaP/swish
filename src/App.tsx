@@ -111,7 +111,7 @@ const App: React.FC = () => (
 					</Route>
 
 					{/* Routing the path of /disclaimerbookingpag to the disclaimer about booking the gym */}
-					<Route path="/create2">
+					<Route path="/create3">
 						<CreatePage3 />
 					</Route>
 
@@ -146,7 +146,7 @@ const App: React.FC = () => (
 					</IonTabButton>
 					<IonTabButton
 						tab="create"
-						href="/create"
+						href="/disclaimer"
 					>
 						<IonIcon
 							aria-hidden="true"

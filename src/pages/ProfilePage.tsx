@@ -11,12 +11,6 @@ const ProfilePage: React.FC = () => {
 				</IonToolbar>
 			</IonHeader>
 			<IonContent fullscreen>
-				<IonHeader collapse="condense">
-					<IonToolbar>
-						<IonTitle size="large">ProfilePage</IonTitle>
-					</IonToolbar>
-				</IonHeader>
-				<ExploreContainer name="ProfilePage" />
 			</IonContent>
 		</IonPage>
 	);

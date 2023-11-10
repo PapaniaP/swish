@@ -13,12 +13,25 @@ import {
 	IonList,
 } from "@ionic/react";
 import "./SearchPage.css";
-import GamesList from "../components/GamesList";
-import { SearchInfo } from "../components/CardSearchGame";
 import CardSearchGame from "../components/CardSearchGame";
 
-const SearchPage: React.FC = () => {
+export type SearchInfo = {
+	id: string;
+	gameName: string;
+	skillLevel: string;
+	gameDescription: string;
+	court: {
+		courtImage: string;
+		location: string;
+		gameType: "Indoor" | "Outdoor";
+		id: string;
+	};
+	gameSize: string;
+	availableSpots: number;
+	time: string;
+};
 
+const SearchPage: React.FC = () => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [filter, setFilter] = useState("");
 	const [games, setGames] = useState<SearchInfo[]>([]);
@@ -49,11 +62,11 @@ const SearchPage: React.FC = () => {
 	}, []);
 
 	useEffect(() => {
-		// Filter games based on search term and selected filter (indoor/outdoor)
 		const filtered = games.filter((game) => {
+			const gameNameLower = game.gameName ? game.gameName.toLowerCase() : "";
 			return (
-				game.gameName.toLowerCase().includes(searchTerm.toLowerCase()) &&
-				(filter === "" || game.type === filter)
+				gameNameLower.includes(searchTerm.toLowerCase()) &&
+				(filter === "" || game.court.gameType === filter)
 			);
 		});
 		setFilteredGames(filtered);
@@ -70,7 +83,7 @@ const SearchPage: React.FC = () => {
 				<IonSearchbar
 					value={searchTerm}
 					debounce={300}
-					onIonChange={(e) => setSearchTerm(e.detail.value)}
+					onIonChange={(e) => setSearchTerm(e.detail.value ?? "")}
 					placeholder="Search for Games"
 				></IonSearchbar>
 
@@ -82,8 +95,8 @@ const SearchPage: React.FC = () => {
 						onIonChange={(e) => setFilter(e.detail.value)}
 					>
 						<IonSelectOption value="">All</IonSelectOption>
-						<IonSelectOption value="indoor">Indoor</IonSelectOption>
-						<IonSelectOption value="outdoor">Outdoor</IonSelectOption>
+						<IonSelectOption value="Indoor">Indoor</IonSelectOption>
+						<IonSelectOption value="Outdoor">Outdoor</IonSelectOption>
 					</IonSelect>
 				</IonItem>
 
