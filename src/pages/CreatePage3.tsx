@@ -227,52 +227,29 @@ const CreatePage3: React.FC = () => {
 
 				<div className="timeAndEquipment">
 					<div className="timepickerContainer">
-						<strong className="timepickerStrong">Select a date and time</strong>
-						<IonDatetimeButton
-							datetime="datetime"
-							className="dateButtons"
-						></IonDatetimeButton>
+						<strong className='timepickerStrong'>Select a date and time</strong>
+						<IonDatetimeButton datetime="datetime" className="dateButtons"></IonDatetimeButton>
 						<IonModal keepContentsMounted={true}>
-							<IonDatetime
-								showDefaultButtons={true}
-								value={formData.time}
-								id="datetime"
-								onIonChange={(e) => handleInputChange("time", e.detail.value!)}
-							></IonDatetime>
+							<IonDatetime value={formData.time} id="datetime" showDefaultButtons={true} onIonChange={e => handleInputChange('time', e.detail.value!)}></IonDatetime>
 						</IonModal>
 					</div>
 					<div>
 						<div className="text">
 							<strong>Equipment</strong>
-							<p>
-								Check off equipment you have. Players who join your game will have the
-								same option
-							</p>
+							<p>Check off equipment you have. Players who join your game will have the same option</p>
 						</div>
 						<IonItem>
 							<IonLabel>Ball</IonLabel>
-							<IonCheckbox
-								checked={formData.equipment.ball}
-								onIonChange={() => handleCheckboxChange("ball")}
-							/>
+							<IonCheckbox checked={formData.equipment.ball} onIonChange={() => handleCheckboxChange('ball')} />
 						</IonItem>
 						<IonItem>
 							<IonLabel>Pump</IonLabel>
-							<IonCheckbox
-								checked={formData.equipment.pump}
-								onIonChange={() => handleCheckboxChange("pump")}
-							/>
+							<IonCheckbox checked={formData.equipment.pump} onIonChange={() => handleCheckboxChange('pump')} />
 						</IonItem>
 					</div>
 				</div>
 			</IonContent>
-			<IonButton
-				className="ion-padding"
-				expand="block"
-				slot="end"
-				onClick={handleSaveAndCreate}
-				routerLink="/search"
-			>
+			<IonButton className="ion-padding" expand="block" slot="end" onClick={handleSaveAndCreate} routerLink="/search">
 				Save and Create
 			</IonButton>
 		</IonPage>
