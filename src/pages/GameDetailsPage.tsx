@@ -1,3 +1,5 @@
+// Paolo - not finished - routing was not working
+
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { SearchInfo } from "../components/CardSearchGame";
