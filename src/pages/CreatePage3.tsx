@@ -193,7 +193,7 @@ const CreatePage3: React.FC = () => {
                         <strong className='timepickerStrong'>Select a date and time</strong>
                         <IonDatetimeButton datetime="datetime" className="dateButtons"></IonDatetimeButton>
                         <IonModal keepContentsMounted={true}>
-                            <IonDatetime showDefaultButtons={true} value={formData.time} id="datetime" onIonChange={e => handleInputChange('time', e.detail.value!)}></IonDatetime>
+                            <IonDatetime value={formData.time} id="datetime" showDefaultButtons={true} onIonChange={e => handleInputChange('time', e.detail.value!)}></IonDatetime>
                         </IonModal>
                     </div>
                     <div>
