@@ -14,56 +14,47 @@ import {
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { trashBinOutline } from "ionicons/icons";
-import { getDatabase, ref, update, remove, push } from "firebase/database";
+import { getDatabase, ref, update, remove, push, onValue } from "firebase/database";
+import { Court } from "./CreatePage3";
 
-interface Court {
-	courtImage: string;
-	courtName: string;
-	gameType: "Indoor" | "Outdoor";
+interface GameState {
 	id: string;
-	location: string;
-}
-
-interface Equipment {
-	ball: boolean;
-	pump: boolean;
-}
-
-interface Game {
-	availableSpots: number;
-	court: Court;
-	equipment: Equipment;
-	gameDescription: string;
 	gameName: string;
+	gameDescription: string;
+	skillLevel: string;
 	gameSize: string;
-	id: string;
-	skillLevel: "Beginner" | "Casual" | "Skilled" | "Experienced";
+	court: Court | null; // Use the Court interface here
+	availableSpots: number;
 	time: string;
+	equipment: {
+		ball: boolean;
+		pump: boolean;
+	};
 }
-
 const EditPage: React.FC = () => {
 	const history = useHistory();
 	const database = getDatabase();
 
-	const [game, setGame] = useState<Game>({
-		availableSpots: 2,
+	const [game, setGame] = useState<GameState>({
+		id: "",
+		gameName: "",
+		gameDescription: "",
+		skillLevel: "",
+		gameSize: "",
 		court: {
-			courtImage: "https://example.com/court-image.jpg",
-			courtName: "Example Court",
-			gameType: "Outdoor",
-			id: "1",
-			location: "Example Location",
+			id: "",
+			courtName: "",
+			courtImage: "",
+			location: "",
+			courtType: "",
+			gameType: "",
 		},
+		availableSpots: 10,
+		time: "",
 		equipment: {
 			ball: true,
 			pump: true,
 		},
-		gameDescription: "This is an example game description.",
-		gameName: "Example Game",
-		gameSize: "3 vs 3",
-		id: "1",
-		skillLevel: "Skilled",
-		time: "Nov 12, 2023 6:00 PM",
 	});
 
 	const handleUpdate = async () => {
@@ -71,7 +62,7 @@ const EditPage: React.FC = () => {
 		try {
 			await update(gameRef, game);
 			console.log("Game Updated", game);
-			history.push("/"); // Redirect to another page after updating
+			history.push("/search"); // Redirect to another page after updating
 		} catch (error) {
 			console.error("Error updating game", error);
 		}
@@ -82,7 +73,7 @@ const EditPage: React.FC = () => {
 		try {
 			await remove(gameRef);
 			console.log("Game Deleted", game);
-			history.push("/"); // Redirect to another page after deleting
+			history.push("/search"); // Redirect to another page after deleting
 		} catch (error) {
 			console.error("Error deleting game", error);
 		}
@@ -130,7 +121,6 @@ const EditPage: React.FC = () => {
 								onIonChange={(e) => setGame({ ...game, gameName: e.detail.value! })}
 							></IonTextarea>
 						</IonItem>
-						{/* Add more form fields as needed */}
 					</form>
 				</main>
 			</IonContent>

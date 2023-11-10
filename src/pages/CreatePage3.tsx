@@ -22,16 +22,16 @@ import "../styles.css";
 import "../theme/variables.css";
 
 // Define a Court interface if you have specific properties for a court
-interface Court {
+export interface Court {
 	id: string;
 	courtImage: string;
 	gameType: string;
 	location: string;
 	courtName: string;
-	// ... other properties of a court
+	courtType: string;
 }
 
-interface GameFormState {
+export interface GameFormState {
 	gameName: string;
 	gameDescription: string;
 	skillLevel: string;
