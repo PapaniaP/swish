@@ -8,7 +8,7 @@ import { defineConfig } from "vite";
 export default defineConfig(({ command }) => {
 	const config = {
 		plugins: [react()],
-		base: "/",
+		base: "/home",
 	};
 
 	if (command !== "serve") {
