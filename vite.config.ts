@@ -12,7 +12,7 @@ export default defineConfig(({ command }) => {
 	};
 
 	if (command !== "serve") {
-		config.base = "/swish-fork/";
+		config.base = "/swish/";
 	}
 
 	return config;
