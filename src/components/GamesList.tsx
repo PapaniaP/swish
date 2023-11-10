@@ -1,3 +1,5 @@
+//Paolo
+// This was a placeholder page that was supposed to be called in the Search page.
 import React, { useEffect, useState } from "react";
 import {
 	IonContent,

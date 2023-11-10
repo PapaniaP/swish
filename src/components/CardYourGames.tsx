@@ -1,3 +1,5 @@
+// Paolo
+// Component used on the Home page for your games. different styling to CardNextGame
 import React from "react";
 import { useHistory } from "react-router";
 import "./CardYourGames.css";
@@ -86,7 +88,7 @@ const CardYourGames: React.FC<CardYourGamesProps> = ({ gameInfo }) => {
 							aria-hidden="true"
 							icon={peopleOutline}
 						/>
-						{gameInfo.gameSize}
+						{gameInfo.availableSpots}
 					</IonChip>
 				</IonItem>
 
