@@ -1,3 +1,5 @@
+// Paolo
+// Card used to display your next game on the homescreen
 import React from "react";
 import { useHistory } from "react-router";
 import "./CardNextGame.css";
@@ -43,12 +45,14 @@ type CardNextGameProps = {
 };
 
 const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
+	// useHistory used to push url, instead of useNavigate
 	const history = useHistory();
 	const handleCardClick = () => {
 		history.push(`/gamedetails/${gameInfo.id}`);
 	};
 
-	const numberOfPeople = gameInfo.gameSize - gameInfo.availableSpots;
+	// Was used to calculate number of people joined game
+	// const numberOfPeople = gameInfo.gameSize - gameInfo.availableSpots;
 	// const numberOfOthers = numberOfPeople - 1;
 	return (
 		<IonCard
@@ -86,7 +90,7 @@ const CardNextGame: React.FC<CardNextGameProps> = ({ gameInfo }) => {
 							aria-hidden="true"
 							icon={peopleOutline}
 						/>
-						{`${numberOfPeople} / ${gameInfo.gameSize}`}
+						{`${gameInfo.availableSpots}`}
 					</IonChip>
 				</IonItem>
 

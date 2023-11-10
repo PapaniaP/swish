@@ -1,3 +1,6 @@
+//Paolo
+//Component that will be rendered on the search page
+
 import React from "react";
 import { useHistory } from "react-router";
 import "./CardSearchGame.css";
@@ -100,6 +103,7 @@ const CardSearchGame: React.FC<CardSearchGameProps> = ({ searchInfo }) => {
 						icon={pinOutline}
 						slot="start"
 					></IonIcon>
+					{/* AND operator used in case the one field is missing */}
 					<IonLabel>{searchInfo.court && searchInfo.court.location}</IonLabel>
 				</IonItem>
 				<div className="card-buttons">

@@ -1,3 +1,5 @@
+//Paolo
+// component used to fetch JoinedGames from the database, this was then removed from the database as we were cleaning up our code
 import React, { useState, useEffect } from "react";
 import { GameInfo } from "./CardYourGames";
 

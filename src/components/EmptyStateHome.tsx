@@ -1,3 +1,5 @@
+// Paolo
+// This component was supposed to be a placeholder for when there are no games on the homepage.
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import React from "react";
 

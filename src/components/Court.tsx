@@ -1,3 +1,6 @@
+//Samuel
+// Component used to on the courts list when choosing a game,
+
 import React, { useState } from "react";
 import "./CardNextGame.css";
 import "./Court.css";

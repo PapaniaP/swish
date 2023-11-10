@@ -1,3 +1,5 @@
+// Samuel
+// component used to fetch courts from the database
 import React, { useState, useEffect } from "react";
 import { GameInfo } from "./CardNextGame";
 
@@ -30,6 +32,7 @@ const CourtFetcher: React.FC<GameFetcherProps> = ({ onDataFetched }) => {
 		fetchData();
 	}, [onDataFetched]);
 
+	// return null - because we dont want to render anything
 	return null;
 };
 

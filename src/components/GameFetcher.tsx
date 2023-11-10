@@ -1,3 +1,6 @@
+//Paolo
+// component used to fetch games from the database and return null, as we are not rendering here.
+
 import React, { useEffect } from "react";
 import { GameInfo } from "./CardNextGame";
 
