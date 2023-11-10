@@ -29,7 +29,7 @@ export type GameInfo = {
 		location: string;
 		gameType: "Indoor" | "Outdoor";
 	};
-	gameSize: number;
+	gameSize: string;
 	availableSpots: number;
 	time: string;
 	organiser: {
@@ -48,7 +48,7 @@ const CardYourGames: React.FC<CardYourGamesProps> = ({ gameInfo }) => {
 		history.push(`/gamedetails/${gameInfo.id}`);
 	};
 
-	const numberOfPeople = gameInfo.gameSize - gameInfo.availableSpots;
+	// const numberOfPeople = gameInfo.gameSize - gameInfo.availableSpots;
 	// const numberOfOthers = numberOfPeople - 1;
 	return (
 		<IonCard
@@ -86,7 +86,7 @@ const CardYourGames: React.FC<CardYourGamesProps> = ({ gameInfo }) => {
 							aria-hidden="true"
 							icon={peopleOutline}
 						/>
-						{`${numberOfPeople} / ${gameInfo.gameSize}`}
+						{gameInfo.gameSize}
 					</IonChip>
 				</IonItem>
 
