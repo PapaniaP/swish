@@ -7,84 +7,86 @@ import {
 	IonToolbar,
 	IonItem,
 	IonTextarea,
-	IonSelect,
-	IonSelectOption,
-	IonDatetime,
-	IonModal,
-	IonCheckbox,
 	IonButtons,
 	IonBackButton,
 	IonIcon,
 } from "@ionic/react";
-import React, { useState, useEffect, FormEvent } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { trashBinOutline } from "ionicons/icons";
+import { getDatabase, ref, update, remove, push } from "firebase/database";
 
-interface RouteParams {
-	gameId: string;
+interface Court {
+	courtImage: string;
+	courtName: string;
+	gameType: "Indoor" | "Outdoor";
+	id: string;
+	location: string;
+}
+
+interface Equipment {
+	ball: boolean;
+	pump: boolean;
+}
+
+interface Game {
+	availableSpots: number;
+	court: Court;
+	equipment: Equipment;
+	gameDescription: string;
+	gameName: string;
+	gameSize: string;
+	id: string;
+	skillLevel: "Beginner" | "Casual" | "Skilled" | "Experienced";
+	time: string;
 }
 
 const EditPage: React.FC = () => {
 	const history = useHistory();
-	const params = useParams<RouteParams>();
-	const [game, setGame] = useState<any>({
-		// Initialize with default values or an empty object
-		name: "",
-		description: "",
-		skillLevel: "",
-		gameSize: "",
-		datetime: "",
-		equipment: { ball: false, pump: false },
+	const database = getDatabase();
+
+	const [game, setGame] = useState<Game>({
+		availableSpots: 2,
+		court: {
+			courtImage: "https://example.com/court-image.jpg",
+			courtName: "Example Court",
+			gameType: "Outdoor",
+			id: "1",
+			location: "Example Location",
+		},
+		equipment: {
+			ball: true,
+			pump: true,
+		},
+		gameDescription: "This is an example game description.",
+		gameName: "Example Game",
+		gameSize: "3 vs 3",
+		id: "1",
+		skillLevel: "Skilled",
+		time: "Nov 12, 2023 6:00 PM",
 	});
 
-	const url = `https://swish-cc699-default-rtdb.europe-west1.firebasedatabase.app/games/${params.gameId}.json`;
-
-	useEffect(() => {
-		async function getGame() {
-			const response = await fetch(url);
-			const data = await response.json();
-			console.log(data);
-			setGame(data);
+	const handleUpdate = async () => {
+		const gameRef = ref(database, `games/${game.id}`);
+		try {
+			await update(gameRef, game);
+			console.log("Game Updated", game);
+			history.push("/"); // Redirect to another page after updating
+		} catch (error) {
+			console.error("Error updating game", error);
 		}
-		getGame();
-	}, [url]);
+	};
 
-	async function handleSubmit(event: FormEvent) {
-		event.preventDefault();
-
-		const gameToUpdate = {
-			name: game.gameName,
-			description: game.gameDescription,
-			skillLevel: game.skillLevel,
-			gameSize: game.gameSize,
-			datetime: game.datetime,
-			equipment: game.equipment,
-		};
-
-		const response = await fetch(url, {
-			method: "PUT",
-			body: JSON.stringify(gameToUpdate),
-		});
-
-		if (response.ok) {
-			history.push("/games");
-		} else {
-			console.log("Something went wrong");
+	const handleDelete = async () => {
+		const gameRef = ref(database, `games/${game.id}`);
+		try {
+			await remove(gameRef);
+			console.log("Game Deleted", game);
+			history.push("/"); // Redirect to another page after deleting
+		} catch (error) {
+			console.error("Error deleting game", error);
 		}
-	}
-
-	async function deleteGame() {
-		if (window.confirm("Are you sure you want to delete this game?")) {
-			const response = await fetch(url, {
-				method: "DELETE",
-			});
-			if (response.ok) {
-				history.push("/games");
-			} else {
-				console.log("Something went wrong");
-			}
-		}
-	}
+	};
 
 	return (
 		<IonPage>
@@ -101,7 +103,7 @@ const EditPage: React.FC = () => {
 						<IonButton
 							fill="clear"
 							size="small"
-							onClick={deleteGame}
+							onClick={handleDelete}
 						>
 							<IonIcon
 								aria-hidden="true"
@@ -117,15 +119,15 @@ const EditPage: React.FC = () => {
 			>
 				<main>
 					{/* Your form fields go here */}
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={(e) => e.preventDefault()}>
 						<IonItem>
 							<IonTextarea
 								label="Name of your game"
 								labelPlacement="stacked"
 								placeholder="E.g. Sunday Basketball"
 								autoGrow={true}
-								value={game.name}
-								onIonChange={(e) => setGame({ ...game, name: e.detail.value! })}
+								value={game.gameName}
+								onIonChange={(e) => setGame({ ...game, gameName: e.detail.value! })}
 							></IonTextarea>
 						</IonItem>
 						{/* Add more form fields as needed */}
@@ -136,7 +138,7 @@ const EditPage: React.FC = () => {
 				expand="block"
 				className="ion-padding"
 				slot="end"
-				onClick={handleSubmit}
+				onClick={handleUpdate}
 			>
 				Save and Update
 			</IonButton>
